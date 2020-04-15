@@ -1,0 +1,79 @@
+<html>
+
+<head>
+    <title>Clase 1</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="./scripts.js"></script>
+    <link rel="stylesheet" type="text/css" href="./theme.css">
+
+    <!-- https://ogp.me/ -->
+    <!-- facebook whatsapp -->
+</head>
+
+<body>
+
+    <button onClick="abrir()">abrir dialog</button>
+    <dialog id="idDialog">
+        <h2>dialog</h2>
+        <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores, laborum fuga voluptatibus soluta quam
+        </p>
+        <button onClick="cerrar()">cerrar</button>
+    </dialog>
+    <form action="" method="get">
+        <label for="field_file">archivo</label>
+        <input type="file" name="archivos" id="field_file">
+        <fieldset>
+            <legend>datos</legend>
+            <label for="field_text">texto</label>
+            <input type="text" name="text" id="field_text"><br>
+            <label for="field_pass">pass</label>
+            <input type="password" name="password" id="field_pass" autocomplete="new-password"><br>
+            <label for="field_mail">email</label>
+            <input type="mail" name="mail" id="field_mail" autocomplete="off"><br>
+        </fieldset>
+        <fieldset>
+            <legend>deportes</legend>
+            bicicleta <input type="checkbox" name="bicicleta" id="field_bike"><br>
+            correr <input type="checkbox" name="correr" id="field_run" checked><br>
+            escalar <input type="checkbox" name="escalar" id="field_climb"><br>
+        </fieldset>
+
+        <label for="field_field_capo"></label> sos capo
+        si<input type="radio" name="capo" id="field_capo"><br>
+        no<input type="radio" name="capo" id="field_capo"><br>
+        <select name="pais" id="field_country">
+            <option value="ar">Argentina</option>
+            <option value="pa">Paraguay</option>
+            <option value="ur">Uruguay</option>
+        </select>
+        <br>
+        <button type="submit">Aceptar</button>
+    </form>
+    <br>
+    
+    <audio controls>
+        <source src="https://www.w3schools.com/tags/horse.ogg" type="audio/ogg">
+        <source src="https://www.w3schools.com/tags/horse.mp3" type="audio/mpeg">
+    </audio>
+    <br>
+    
+    <video src="https://www.w3schools.com/tags/movie.mp4" width="300px" id="video" controls ></video><!-- autoplay -->
+
+    <button id="play">play</button>
+    <button id="pausa">pausa</button>
+
+    <!-- https://schema.org/ -->
+    <article itemscope itemtype="http://schema.org/Movie">
+        <h2 itemprop="name">Volver al futuro</h2>
+        <p >director: <span itemprop="director">robert zemequis</span></p>
+        <p >duration: <span itemprop="duration">1:45</span></p>
+        <img alt="tapa" itemprop="image" width="300" src="https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcR80666e4S2B6AgopyUP0aybHhpFGBNbWf8oYtNWlm0rQ_tf8gd">
+
+    </article>
+
+</body>
+
+</html>
