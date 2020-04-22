@@ -1,0 +1,102 @@
+html,
+body,
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  position: relative;
+  font-family: "Manrope", sans-serif;
+  box-sizing: border-box;
+}
+
+.title-2 {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-weight: 200;
+}
+
+.title-3 {
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-weight: 800;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.green {
+  color: #02c202;
+}
+
+img {
+  width: 100%;
+}
+
+header {
+  background: black;
+  padding: 15px 0;
+  height: 35px;
+  background-image: url("../img/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: table;
+  width: 100%;
+}
+header .logo {
+  /* background: red; */
+  float: left;
+}
+header .logo img {
+  max-width: 220px;
+}
+header nav {
+  /* background: green; */
+  float: right;
+}
+header nav ul {
+  list-style-type: none;
+}
+header nav ul li {
+  float: left;
+  color: white;
+  padding: 8px 10px;
+  margin-left: 3px;
+  text-transform: capitalize;
+}
+header nav ul li:hover {
+  background: blue;
+}
+header h1 {
+  color: white;
+  font-size: 34px;
+  margin: 20px 0;
+  font-weight: 700;
+}
+
+.about {
+  text-align: center;
+}
+.about img {
+  height: 70px;
+}
+
+.properties img {
+  border-radius: 5px;
+}
+.properties p {
+  font-size: 14px;
+}
+.properties .icons {
+  text-align: center;
+  margin-top: 15px;
+}
+.properties .icons img {
+  height: 35px;
+  width: auto;
+}
+
+/*# sourceMappingURL=theme.css.map */

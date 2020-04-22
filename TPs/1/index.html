@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Bienes Raices</title>
     <meta charset="UTF-8">
@@ -7,8 +8,13 @@
     <meta name="keywords" content="Casa,Departamento,Venta, Alquiler">
     <meta name="author" content="Diego Dalairac">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+
     <script src="./js/scripts.js"></script>
-    <link rel="stylesheet" type="text/css" href="./css/theme.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./assets/css/theme.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./assets/css/grid.css"> -->
 
     <!-- https://ogp.me/ -->
     <!-- facebook whatsapp -->
@@ -18,9 +24,121 @@
     <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
     <meta property="og:description" content="Si buscas alquilar o comprar una propiedad, aca encontraras los mejores precios" />
 </head>
-<body>
 
-    
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="logo">
+                        <a href="./"><img src="./assets/img/logo.svg" alt="logo"></a>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="./about.html"></a>Nosotros</li>
+                            <li><a href="./properties.html"></a>Anuncios</li>
+                            <li><a href="./blog.html"></a>Blog</li>
+                            <li><a href="./contact.html"></a>Contacto</li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <h1>Venta de Casas y Departamentos <br>Exclusivos de Lujo</h1>
+        </div>
+    </header>
+    <div class="container">
+        <section class="about">
+            <h2 class="title-2">Más Sobre Nosotros</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="./assets/img/icono1.svg" alt="Foto propiedad">
+                    <h3 class="title-3 uppercase">Seguridad</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="./assets/img/icono2.svg" alt="Foto propiedad">
+                    <h3 class="title-3 uppercase">El mejor precio</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores.
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <img src="./assets/img/icono3.svg" alt="Foto propiedad">
+                    <h3 class="title-3 uppercase">A tiempo</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <main class="properties">
+            <h2 class="title-2">Casas y Departamentos en Venta</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="./assets/img/anuncio1.jpg" alt="Foto propiedad">
+                    <h3 class="title-3">Casa de Lujo en el Lago</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores,
+                        aliquid eveniet.</p>
+                    <span class="green">$450.000</span>
+                    <div class="row icons">
+                        <div class="col"><img src="./assets/img/icono_wc.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_estacionamiento.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_dormitorio.svg" alt=""> 4</div>
+                    </div>
+                    <button>Ver propiedad</button>
+                </div>
+                <div class="col-md-4">
+                    <img src="./assets/img/anuncio2.jpg" alt="Foto propiedad">
+                    <h3 class="title-3">Casa Minimalista</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores,
+                        aliquid eveniet.</p>
+                    <span class="green">$400.000</span>
+                    <div class="row icons">
+                        <div class="col"><img src="./assets/img/icono_wc.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_estacionamiento.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_dormitorio.svg" alt=""> 4</div>
+                    </div>
+                    <button>Ver propiedad</button>
+                </div>
+                <div class="col-md-4">
+                    <img src="./assets/img/anuncio3.jpg" alt="Foto propiedad">
+                    <h3 class="title-3">Casa con Pileta</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores,
+                        aliquid eveniet.</p>
+                    <span class="green">$375.000</span>
+                    <div class="row icons">
+                        <div class="col"><img src="./assets/img/icono_wc.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_estacionamiento.svg" alt=""> 3</div>
+                        <div class="col"><img src="./assets/img/icono_dormitorio.svg" alt=""> 4</div>
+                    </div>
+                    <button>Ver propiedad</button>
+                </div>
+            </div>
+        </main>
+
+        <section>
+            <h2 class="title-2">Blog</h2>
+            <div class="row">
+                <article class="col-md-8">
+                    <h3 class="title-3">sarasa</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores,
+                        aliquid eveniet aut perferendis commodi, beatae veritatis quis neque. Recusandae nesciunt a voluptates inventore aliquid,
+                        tempore
+                        repudiandae eligendi voluptatum. Error corporis illum animi in neque veritatis possimus officiis alias. Numquam itaque
+                        deleniti
+                        ducimus dolorem laboriosam saepe dolorum eum animi architecto provident. Harum voluptate sunt, nostrum et autem enim.
+                        Blanditiis
+                        quidem consequatur illum nihil, placeat, voluptatibus deleniti deserunt, ex aperiam perspiciatis eveniet sed quibusdam labore
+                        facilis ab accusamus omnis. Cum sint aliquid tempore tenetur ex necessitatibus quia asperiores excepturi hic labore. Cum, aut
+                        aliquam.</p>
+                </article>
+                <aside class="col-md-4">
+                    dfsrfasdfzs
+                </aside>
+            </div>
+        </section>
+    </div>
+    <footer>footer</footer>
 
 </body>
+
 </html>
