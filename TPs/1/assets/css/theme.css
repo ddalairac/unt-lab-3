@@ -9,6 +9,10 @@ body,
   box-sizing: border-box;
 }
 
+.c-secondary {
+  color: #ffa325;
+}
+
 .title-2 {
   font-size: 30px;
   text-align: center;
@@ -36,6 +40,42 @@ img {
   width: 100%;
 }
 
+button {
+  padding: 15px;
+  margin-top: 25px;
+  min-width: 150px;
+  transition: background 500ms;
+  background: #ffa325;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background: #f46b00;
+}
+button.secondary {
+  background: #4ecc26;
+  color: white;
+}
+button.secondary:hover {
+  background: #4ea326;
+}
+
+nav ul {
+  list-style-type: none;
+}
+nav ul li {
+  float: left;
+  color: white;
+  padding: 8px 10px;
+  margin-left: 3px;
+  text-transform: capitalize;
+  transition: background 500ms;
+  cursor: pointer;
+}
+nav ul li:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
 header {
   background: black;
   padding: 15px 0;
@@ -54,21 +94,7 @@ header .logo img {
   max-width: 220px;
 }
 header nav {
-  /* background: green; */
   float: right;
-}
-header nav ul {
-  list-style-type: none;
-}
-header nav ul li {
-  float: left;
-  color: white;
-  padding: 8px 10px;
-  margin-left: 3px;
-  text-transform: capitalize;
-}
-header nav ul li:hover {
-  background: blue;
 }
 header h1 {
   color: white;
@@ -84,8 +110,14 @@ header h1 {
   height: 70px;
 }
 
-.properties img {
-  border-radius: 5px;
+.properties .info {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+.properties .info button {
+  width: 100%;
 }
 .properties p {
   font-size: 14px;
@@ -97,6 +129,61 @@ header h1 {
 .properties .icons img {
   height: 35px;
   width: auto;
+}
+.properties .all-container {
+  height: 54px;
+}
+.properties .all-container button {
+  float: right;
+  margin: 0;
+}
+
+.contact {
+  background-image: url("../img/encuentra.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  padding: 30px 0;
+  margin-top: 50px;
+}
+
+.blog-comments {
+  margin-bottom: 50px;
+}
+.blog-comments hr {
+  border-top: 5px solid #4ecc26;
+  width: 100px;
+}
+.blog-comments .comments {
+  background: #4ecc26;
+  background-image: url("../img/comilla.svg");
+  background-repeat: no-repeat;
+  background-position: 15px 20px;
+  background-size: 40px;
+  padding: 20px 30px 60px 60px;
+  border-radius: 15px;
+  color: white;
+}
+.blog-comments .comments p {
+  line-height: 2;
+  font-size: 22px;
+}
+.blog-comments .comments p:nth-child(2) {
+  float: right;
+}
+
+footer {
+  background: #2e2e2e;
+  color: white;
+  height: 60px;
+  padding-top: 10px;
+}
+footer nav {
+  float: left;
+}
+footer .rigts {
+  float: right;
+  padding-top: 8px;
 }
 
 /*# sourceMappingURL=theme.css.map */
