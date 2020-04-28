@@ -1,0 +1,44 @@
+.linea {
+  background: green;
+  height: 60px;
+  display: flex;
+  margin-bottom: 5px;
+}
+.linea.justify {
+  justify-content: space-between;
+}
+.linea.align-items {
+  align-items: center;
+}
+.linea.wrap {
+  flex-wrap: wrap;
+}
+.linea.flex-direction {
+  flex-direction: column;
+}
+
+.columna {
+  background: yellow;
+  width: 100px;
+  border: 1px solid black;
+}
+.columna.grow-1 {
+  flex-grow: 1;
+}
+.columna.grow-2 {
+  flex-grow: 2;
+}
+.columna.shrink-1 {
+  flex-shrink: 1;
+}
+.columna.shrink-2 {
+  flex-shrink: 2;
+}
+.columna.basis-20 {
+  flex-basis: 20%;
+}
+.columna.basis-80 {
+  flex-shrink: 80%;
+}
+
+/*# sourceMappingURL=grid.css.map */
