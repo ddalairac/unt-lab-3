@@ -109,6 +109,9 @@ header {
         margin-top: 15px;
         img {
             height: 35px;
+            @media (max-width: 960px) and (min-width: 720px) {
+                width: 20px;
+            }
             width: auto;
         }
     }
@@ -134,7 +137,12 @@ header {
         border-top: 5px solid $green;
         width: 100px;
     }
-    .comments{
+    .blog {
+        article {
+            margin-bottom: 30px;
+        }
+    }
+    .comments {
         background: #4ecc26;
         background-image: url("../img/comilla.svg");
         background-repeat: no-repeat;
@@ -143,21 +151,24 @@ header {
         padding: 20px 30px 60px 60px;
         border-radius: 15px;
         color: white;
-        p{
+        p {
             line-height: 2;
             font-size: 22px;
+            @media (max-width: 1140px) and (min-width: 960px) {
+                font-size: 18px;
+            }
         }
-        p:nth-child(2){
+        p:nth-child(2) {
             float: right;
         }
     }
 }
-footer{
+footer {
     background: rgb(46, 46, 46);
     color: white;
     height: 60px;
     padding-top: 10px;
-    
+
     nav {
         float: left;
     }

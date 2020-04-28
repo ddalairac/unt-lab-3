@@ -9,8 +9,20 @@ body,
   box-sizing: border-box;
 }
 
+.c-primary {
+  color: #E08709;
+}
+
 .c-secondary {
-  color: #ffa325;
+  color: #4ecc26;
+}
+
+.bg-primary {
+  background: #E08709;
+}
+
+.bg-secondary {
+  background: #4ecc26;
 }
 
 .title-2 {
@@ -45,7 +57,7 @@ button {
   margin-top: 25px;
   min-width: 150px;
   transition: background 500ms;
-  background: #ffa325;
+  background: #E08709;
   color: white;
   cursor: pointer;
 }
@@ -130,6 +142,11 @@ header h1 {
   height: 35px;
   width: auto;
 }
+@media (max-width: 960px) and (min-width: 720px) {
+  .properties .icons img {
+    width: 20px;
+  }
+}
 .properties .all-container {
   height: 54px;
 }
@@ -154,6 +171,9 @@ header h1 {
   border-top: 5px solid #4ecc26;
   width: 100px;
 }
+.blog-comments .blog article {
+  margin-bottom: 30px;
+}
 .blog-comments .comments {
   background: #4ecc26;
   background-image: url("../img/comilla.svg");
@@ -167,6 +187,11 @@ header h1 {
 .blog-comments .comments p {
   line-height: 2;
   font-size: 22px;
+}
+@media (max-width: 1140px) and (min-width: 960px) {
+  .blog-comments .comments p {
+    font-size: 18px;
+  }
 }
 .blog-comments .comments p:nth-child(2) {
   float: right;
