@@ -1,26 +1,23 @@
+/* Grilla con flex simil bootstrap */
+
 .container {
     width: 90%;
     margin: 0 auto;
 }
+
 .row {
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap:wrap;
     margin-right: -15px;
     margin-left: -15px;
-    box-sizing: border-box;
 }
-.row:after,.row:before{
-    display: table;
-    content: " ";
-}
-.row:after {
-    clear: both;
-}
-[class^=col-]{
+
+[class^=col]{
     position: relative;
-    min-height: 1px;
+    box-sizing: border-box;
     padding-right: 15px;
     padding-left: 15px;
-    float: left;
-    box-sizing: border-box;
 }
 .col-1{ width: 8.33333333%; }
 .col-2{ width: 16.66666667%; }
@@ -35,3 +32,18 @@
 .col-11{ width: 91.66666667%; }
 .col-12{ width: 100%; }
 
+
+.col-1,.col-2,.col-3,.col-4,.col-5,.col-6,.col-7,.col-8,.col-9,.col-10,.col-11,.col-12{ 
+    &.sm{  
+        @media (max-width: 540px){ width: 100%;  } 
+    }
+    &.md{  
+        @media (max-width: 720px){ width: 100%;  } 
+    }
+    &.lg{  
+        @media (max-width: 960px){ width: 100%;  } 
+    }
+    &.xl{  
+        @media (max-width: 1140px){ width: 100%;  } 
+    }
+}
