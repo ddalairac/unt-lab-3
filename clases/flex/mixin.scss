@@ -1,0 +1,12 @@
+@mixin style_func($bg: red, $fill:white){
+    background: $bg;
+    color:$fill;
+    border-radius: 25px;
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 3px 5px;
+}
+
+a{
+    @include style_func(cadetblue ,white)
+}
