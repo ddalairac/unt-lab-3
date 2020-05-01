@@ -42,39 +42,42 @@
     },
     "properties": {
         "title": "Casas y Departamentos en Venta",
-        "us": [
+        "prop": [
             {
-                "img": "./assets/img/icono1.svg",
+                "img": "./assets/img/anuncio1.jpg",
                 "title": "Casa de Lujo en el Lago",
                 "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores, aliquid eveniet.",
                 "price": 450000,
                 "bath": 3,
                 "garage": 3,
-                "bed": 4
+                "bed": 4,
+                "link":"#"
             },
             {
-                "img": "./assets/img/icono2.svg",
+                "img": "./assets/img/anuncio2.jpg",
                 "title": "Casa Minimalista",
                 "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores, aliquid eveniet.",
                 "price": 400000,
                 "bath": 3,
                 "garage": 3,
-                "bed": 4
+                "bed": 4,
+                "link":"#"
             },
             {
-                "img": "./assets/img/icono3.svg",
+                "img": "./assets/img/anuncio3.jpg",
                 "title": "Casa con Pileta",
                 "text": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, et ea. Corrupti voluptatem, dignissimos ipsa ab asperiores, aliquid eveniet.",
                 "price": 375000,
                 "bath": 3,
                 "garage": 3,
-                "bed": 4
+                "bed": 4,
+                "link":"#"
             }
         ]
     },
     "blog": {
         "title": "Nuestro Blog",
-        "us": [
+        "articles": [
             {
                 "img": "./assets/img/blog1.jpg",
                 "title": "Terraza en el techo de tu casa",

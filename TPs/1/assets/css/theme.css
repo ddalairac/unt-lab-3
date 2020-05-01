@@ -173,6 +173,12 @@ header h1 {
 }
 .blog-comments .blog article {
   margin-bottom: 30px;
+  opacity: 0;
+  transition: opacity 1s;
+  transition-timing-function: ease-in-out;
+}
+.blog-comments .blog article.in {
+  opacity: 1;
 }
 .blog-comments .comments {
   background: #4ecc26;
