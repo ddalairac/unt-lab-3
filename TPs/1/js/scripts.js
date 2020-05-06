@@ -9,7 +9,6 @@ fetch('./assets/json/translations.json')
     })
     .then(function (d) {
         data = d;
-        console.log("data:", d);
         renderComponents()
     });
 
@@ -91,7 +90,7 @@ function renderBlogComponents() {
         let articles = blogCont.getElementsByTagName("article")
         // console.log("remove", articles)
         if (articles && articles.length > 1 ) {
-            console.log("remove", articles[0])
+            // console.log("remove", articles[0])
             articles[0].remove()
         }
     }
@@ -101,9 +100,9 @@ function renderBlogComponents() {
         blogCont.appendChild(element)
         setTimeout(() => {
             element.classList.add('in');
-            console.log(element)
+            // console.log(element)
             
-            console.log(i)
+            // console.log(i)
         }, 10);
     }
     var i = 0
