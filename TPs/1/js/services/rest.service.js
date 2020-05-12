@@ -1,4 +1,19 @@
-function call(URI, request) {
+// ? Ejemplo simple
+// var data = {};
+// fetch('./assets/json/translations.json')
+//     .then(function (response) {
+//         return response.json();
+//     })
+//     .catch(function (error) {
+//         console.log('Hubo un problema con la petición Fetch:' + error.message);
+//     })
+//     .then(function (d) {
+//         data = d;
+//         renderComponents()
+//     });
+
+
+export function call(URI, request) {
 
     let myBody = JSON.stringify(request);
     let header = {
@@ -56,14 +71,7 @@ function call(URI, request) {
 
 }
 
-
-call('./assets/json/translations.jsons').then(
-    (res) => console.log("call res", res),
-).catch(
-    (err) => console.log("call err", err),
-)
-
-class ServiceResult {
+export class ServiceResult {
     cod;
     message;
     data;
@@ -74,3 +82,5 @@ class ServiceResult {
         this.data = data;
     }
 }
+
+
