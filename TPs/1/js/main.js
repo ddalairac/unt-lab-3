@@ -2,6 +2,8 @@ import { HomeComponent } from "./components/home.component.js";
 
 var h = new HomeComponent()
 
+//? http://placeimg.com/480/320/any
+//? http://mockaroo.com
 
 // import { AboutComponent } from "./components/about.component.js";
 // import { PropertiesComponent } from "./components/properties.component.js";
