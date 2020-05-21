@@ -1,0 +1,9 @@
+{
+    "head":["id","nombre","dni"],
+    "body":[
+        {"id":1, "nombre":"Diego Dalairac", "dni": 29747505},
+        {"id":2, "nombre":"Marty McFly", "dni": 54345234},
+        {"id":3, "nombre":"Doc BRowns", "dni": 7547567},
+        {"id":4, "nombre":"Biff Tannen", "dni": 45674567}
+    ]
+}

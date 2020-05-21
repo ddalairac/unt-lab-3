@@ -28,8 +28,9 @@ export class Table {
         tableData.head  .forEach(thData => {
             let thEl = document.createElement('th');
             thEl.innerHTML = `<p>${thData}</p>`
-            tableEl.appendChild(thEl)
+            theadEl.appendChild(thEl)
         });
+        tableEl.appendChild(theadEl)
         
         let tbodyEl = document.createElement('tbody');
         tableData.body.forEach(trData => {
