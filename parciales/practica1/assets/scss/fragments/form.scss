@@ -1,0 +1,32 @@
+.form {
+    width: 100%;
+    background: white;
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
+    margin-bottom: 30px;
+    padding: 30px 20px;
+    border-radius: 5px;
+    .field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        &.radio,
+        &.checkbox {
+            flex-direction: row;
+        }
+        label{
+            
+            font-weight: 300;
+            text-transform: capitalize;
+            margin-bottom: 3px;
+        }
+        select,
+        input {
+            border-radius: 3px;
+            border: 1px solid grey;
+            padding: 3px 8px;
+        }
+    }
+}
