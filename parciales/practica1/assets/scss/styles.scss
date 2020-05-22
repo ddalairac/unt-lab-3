@@ -14,8 +14,6 @@ body {
 * {
     box-sizing: border-box;
 }
-@import "./fragments/table.scss";
-@import "./fragments/form.scss";
 
 #container {
     width: 90%;
@@ -32,3 +30,7 @@ body {
     left: 0;
     z-index: 1000;
 }
+@import "./fragments/text.scss";
+@import "./fragments/table.scss";
+@import "./fragments/form.scss";
+

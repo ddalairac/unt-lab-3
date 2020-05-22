@@ -1,3 +1,4 @@
+import { MemoryManager } from "../services/memory-manager.js";
 
 export class Table {
     static render(tableData) {
@@ -34,16 +35,19 @@ export class Table {
     }
 
     static rowClick() {
-        console.log(event.path)
-        // console.log(event.path[2])
         let tbody = document.querySelectorAll("tbody tr");
         for (let row of tbody) {
             if (row == event.path[1]) {
-                row.classList.add("active");
+                if (row.classList.contains("active")) {
+                    row.classList.remove("active");
+                    MemoryManager.instance.selectedRowElement = null
+                } else {
+                    row.classList.add("active");
+                    MemoryManager.instance.selectedRowElement = row
+                }
             } else {
                 row.classList.remove("active");
             }
         }
-
     }
 }

@@ -1,7 +1,4 @@
-import { Table } from './js/components/table.js';
-import { restXHR, restFetch } from './js/services/rest.js';
-import { Memorymanager } from './js/services/memory-manager.js';
+import { MemoryManager } from './js/services/memory-manager.js';
 
+MemoryManager.instance.readAndRender()
 
-var mm = new Memorymanager()
-mm.readAndRender();

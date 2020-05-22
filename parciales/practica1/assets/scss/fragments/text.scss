@@ -1,0 +1,52 @@
+h1 {
+    color: white;
+    font-weight: 300;
+}
+
+button {
+    padding: 7px 25px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    background: $colorLigthgrey;
+    color: $colorBlueDark;
+
+    &.outline{
+        background:none;
+        border:1px solid $colorBorder;
+    }
+    &.primary {
+        background: $colorMagenta;
+        color: white;
+
+        &.outline {
+            background: none;
+            color: $colorMagenta;
+            border: 1px solid $colorMagenta;
+        }
+        &:active {
+            color: white;
+            background: $colorMagentaDark;
+        }
+    }
+    &.secondary {
+        background: $colorBlue;
+        color: white;
+
+        &.outline {
+            background: none;
+            color: $colorBlue;
+            border: 1px solid $colorBlue;
+        }
+        &:active {
+            color: white;
+            background: $colorBlueDark;
+        }
+    }
+}
+
+// $colorBlue: #4258d0;
+// $colorBlueDark: #36304a;
+// $colorMagenta: #e42861;
+// $colorMagentaLigth: #f792b0;
+// $colorMagentaDark: #50343d;
