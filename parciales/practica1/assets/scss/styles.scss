@@ -6,10 +6,19 @@ body {
     border: 0;
     width: 100%;
     min-height: 100%;
-    background-image: linear-gradient(45deg, $colorBlue, $colorMagenta);
+    height: auto;
+}
+body {
+    // background-image: linear-gradient(45deg, $colorBlue, $colorMagenta);
+
+    background-color: $colorBlue;
+    background-image: linear-gradient(0deg, $colorBlue, $colorMagenta);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     font-family: "Roboto", sans-serif;
+    overflow-y: scroll;
 }
 * {
     box-sizing: border-box;
@@ -18,6 +27,7 @@ body {
 #container {
     width: 90%;
     margin: 30px 0;
+    position: relative;
 }
 .loading {
     position: fixed;
@@ -33,4 +43,4 @@ body {
 @import "./fragments/text.scss";
 @import "./fragments/table.scss";
 @import "./fragments/form.scss";
-
+@import "./fragments/buttons.scss";

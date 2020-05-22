@@ -13,15 +13,19 @@
     <meta property="og:description" content="UTN, Lab 3, Practica parcial, CRUD js" />
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="./main.js" type="module"></script>
 </head>
 
 <body>
     <div id="container">
-        <h1>Lab 3 Parcial</h1>
+        <h1>Lab 3 Parcial 
+            <button id="btnNew" class="secondary">Nuevo</button>
+        </h1>
         <form class="form close" action="#" method="post">
-            <h2>Alta</h2>
+            <button id="btnCancelX" class="btnClose"><i class="fas fa-times"></i></button>
+            <h2 id="formTitle">Alta</h2>
             <div class="field">
                 <label for="nombre">nombre</label>
                 <input placeholder="nombre" type="text" id="nombre" name="nombre" value="" required>

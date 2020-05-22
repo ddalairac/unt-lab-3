@@ -1,4 +1,5 @@
 import { Table } from '../components/table.js';
+import { Form } from '../components/form.js';
 import { restXHR, restFetch } from './rest.js';
 export class MemoryManager {
     constructor() {
@@ -6,7 +7,8 @@ export class MemoryManager {
             throw "No se puede crear otra instancia de MemoryManager";
         }
         MemoryManager._instance = this;
-        this.setButons();
+        this.formInstance = new Form();
+        
     }
     static get instance() {
         if (!this._instance)
@@ -18,7 +20,7 @@ export class MemoryManager {
     _selectedRowElement;
     tableElement;
     containerElement;
-    formElement;
+    formInstance;
     data;
     selectID
 
@@ -32,11 +34,11 @@ export class MemoryManager {
                 if (dom.getAttribute("data-before") == "id") {
                     console.log("selectID: " + dom.innerText);
                     this.selectID = parseInt(dom.innerText);
-                    this.editDataInForm(this.selectID)
+                    this.formInstance.editDataInForm(this.selectID, value);
                 }
             }
         } else {
-            this.cancelEditDataInForm();
+            this.formInstance.cancelEditDataInForm();
             this.selectID = null;
         }
     }
@@ -54,33 +56,5 @@ export class MemoryManager {
             }
         )
     }
-    editDataInForm(id) {
-        let item = this.data.find(row => row.id == id);
-        console.log(item)
-        // return item
-        if (!this.formElement)
-            this.formElement = document.querySelector(".form");
-        this.formBGElement = document.querySelector(".grey-background");
 
-        this.formElement.classList.remove("close");
-    }
-    cancelEditDataInForm() {
-        this.formElement.classList.add("close");
-    }
-
-    setButons() {
-        document.getElementById("btnSubmit").onclick = this.onSubmit;
-        document.getElementById("btnRemove").onclick = this.onRemove;
-        document.getElementById("btnCancel").onclick = this.onCancel;
-    }
-    onSubmit() {
-        event.preventDefault();
-    }
-    onRemove() {
-        event.preventDefault();
-    }
-    onCancel() {
-        event.preventDefault();
-        MemoryManager.instance.cancelEditDataInForm();
-    }
 }

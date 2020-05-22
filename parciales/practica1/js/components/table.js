@@ -35,8 +35,8 @@ export class Table {
     }
 
     static rowClick() {
-        let tbody = document.querySelectorAll("tbody tr");
-        for (let row of tbody) {
+        let rows = document.querySelectorAll("tbody tr");
+        for (let row of rows) {
             if (row == event.path[1]) {
                 if (row.classList.contains("active")) {
                     row.classList.remove("active");
