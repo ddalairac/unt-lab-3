@@ -12,6 +12,7 @@ export class Field {
         }
         this.nombre = nombre;
         this.label = nombre.toLowerCase().split('_').join(' ');
+        this.label = this.label.charAt(0).toUpperCase() + this.label.slice(1);
         this.placeholder = placeholder;
         this.isRequired = isRequired;
         this.isDisabled = isDisabled;
@@ -25,7 +26,6 @@ export class Field {
     isRequired;
     isDisabled;
 }
-
 export class FieldTextEmail extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, type = "text", maxlength = 0) {
         super(nombre, placeholder, isRequired, isDisabled);
@@ -49,9 +49,8 @@ export class FieldTextEmail extends Field {
         this.element = fieldEl;
     }
 }
-
 export class FieldNumber extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, min = 0, max = 0) {
+    constructor(nombre, placeholder, isRequired, isDisabled, min, max) {
         super(nombre, placeholder, isRequired, isDisabled);
         this.min = min;
         this.max = max;
@@ -62,8 +61,16 @@ export class FieldNumber extends Field {
     renderField() {
         let fieldEl = document.createElement('div');
         fieldEl.classList.add("field");
-        let minimo = this.min ? `min=${this.min}` : '';
-        let maximo = this.max ? `max=${this.max}` : '';
+        let minimo
+        let maximo
+        if (this.min != undefined)
+            minimo = `min=${this.min}`
+        else
+            minimo = '';
+        if (this.max != undefined)
+            maximo = `max=${this.max}`
+        else
+            maximo = '';
         fieldEl.innerHTML = `
         <label for="${this.nombre}">${this.label}</label>
         <input id="${this.nombre}" type="number" name="${this.nombre}" placeholder="${this.placeholder}" ${minimo} ${maximo}>`;
@@ -75,7 +82,6 @@ export class FieldNumber extends Field {
         this.element = fieldEl;
     }
 }
-
 export class FieldCheckbox extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled) {
         super(nombre, placeholder, isRequired, isDisabled);
@@ -98,7 +104,6 @@ export class FieldCheckbox extends Field {
         this.element = fieldEl;
     }
 }
-
 export class FieldTextarea extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, rows = 0) {
         super(nombre, placeholder, isRequired, isDisabled);
@@ -122,7 +127,6 @@ export class FieldTextarea extends Field {
         this.element = fieldEl;
     }
 }
-
 export class FieldDate extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, min = '', max = '') {
         super(nombre, placeholder, isRequired, isDisabled);
@@ -148,9 +152,8 @@ export class FieldDate extends Field {
         this.element = fieldEl;
     }
 }
-
 export class FieldRadio extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, options=[""]) {
+    constructor(nombre, placeholder, isRequired, isDisabled, options = [""]) {
         super(nombre, placeholder, isRequired, isDisabled);
         this.options = options;
         this.renderField();
@@ -162,25 +165,25 @@ export class FieldRadio extends Field {
         fieldEl.classList.add("radio");
 
         let disabled = this.isDisabled ? `disabled` : '';
+        let required = this.isRequired ? `required` : '';
         let optionsElements = "";
         this.options.forEach(option => {
             optionsElements += `
-            <input type="radio" id="${option}" name="${this.nombre}" value="${option}" ${disabled}>
+            <input type="radio" id="${option}" name="${this.nombre}" value="${option}" ${disabled} ${required}>
             <label for="${option}">${option.toLowerCase().split('_').join(' ')}</label>`
         });
         fieldEl.innerHTML = `
-                <p>${this.placeholder}</p>
+                <p>${this.label}</p>
                 ${optionsElements}`;
         let inputEl = fieldEl.childNodes[3];
         // inputEl.disabled = this.isDisabled;
-        inputEl.required = this.isRequired;
+        // inputEl.required = this.isRequired;
 
         this.element = fieldEl;
     }
 }
-
 export class FieldSelect extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, options=[""]) {
+    constructor(nombre, placeholder, isRequired, isDisabled, options = [""]) {
         super(nombre, placeholder, isRequired, isDisabled);
         this.options = options;
         this.renderField();
@@ -192,8 +195,10 @@ export class FieldSelect extends Field {
 
         let optionsElements = `<option value="" disabled selected hidden>${this.placeholder}</option>`;
         this.options.forEach(option => {
+            let label = option.toLowerCase().split('_').join(' ');
+            label = label.charAt(0).toUpperCase() + label.slice(1);
             optionsElements += `
-            <option value="${option}">${option.toLowerCase().split('_').join(' ')}</option>`
+            <option id="${option}" value="${option}">${label}</option>`
         });
         fieldEl.innerHTML = `
                 <label for="${this.nombre}">${this.label}</label>

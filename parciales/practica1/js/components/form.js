@@ -25,8 +25,127 @@ export class Form {
     }
     formClose() {
         this.formElement.classList.add("close");
+        this.formElement.classList.remove("edit");
         this.btnNewElement.disabled = false;
 
+    }
+    newDataInForm() {
+        this.formOpen();
+        this.formElement.setAttribute("style", `top: 80px;`);
+        this.titleElement.innerText = "Nuevo item";
+        this.formElement.classList.remove("edit");
+        document.getElementById("btnSubmit").innerText = "Aceptar";
+        document.getElementById("btnRemove").classList.add("hidden");
+    }
+    // editDataInForm(id, trElement) {
+    editDataInForm(index, topPosition) {
+        let formData = MemoryManager.instance.data[index];
+        this.populateFormValues(formData)
+
+        this.formOpen();
+        this.formElement.setAttribute("style", `top: ${topPosition + 80}px;`);
+        this.formElement.classList.add("edit");
+        this.titleElement.innerText = "Editar ID: " + formData.id;
+        document.getElementById("btnSubmit").innerText = "Guardar";
+        document.getElementById("btnRemove").classList.remove("hidden");
+    }
+    cancelEditDataInForm() {
+        this.formClose();
+        this.cleanFormValues();
+        let rows = document.querySelectorAll("tbody tr");
+        for (let row of rows) {
+            row.classList.remove("active");
+        }
+    }
+    populateFormValues(formData) {
+        for (let fm of fieldsModel) {
+            try {
+                switch (fm.type) {
+                    case "radio":
+                        fm.options.forEach(opt => {
+                            let element = document.getElementById(opt);
+                            element.checked = (formData[fm.nombre] == element.value) 
+                        });
+                        break;
+                    case "select":
+                        fm.options.forEach(opt => {
+                            let element = document.getElementById(opt);
+                            element.selected = (formData[fm.nombre] == element.value) 
+                        });
+                        break;
+                    case "checkbox":
+                        document.getElementById(fm.nombre).checked = JSON.parse(formData[fm.nombre]);
+                        break;
+
+                    default:
+                        document.getElementById(fm.nombre).value = formData[fm.nombre];
+                        break;
+                }
+            } catch (error) {
+                console.error("error populateFormValues() en id: "+ fm.nombre);
+                console.error(error);
+            }
+        }
+        // }
+    }
+    readFormValues() {
+        let request = {}
+        for (let fm of fieldsModel) {
+            let value;
+            let keyValue;
+            try {
+                switch (fm.type) {
+                    case "radio":
+                        fm.options.forEach(opt => {
+                            let radioElement = document.getElementById(opt);
+                            if (radioElement.checked) {
+                                value = radioElement.value;
+                            }
+                        });
+                        break;
+
+                    case "checkbox":
+                        value = document.getElementById(fm.nombre).checked;
+                        break;
+
+                    default:
+                        value = document.getElementById(fm.nombre).value;
+                        break;
+                }
+                keyValue = { [fm.nombre]: value };
+                request = { ...request, ...keyValue };
+            } catch (error) {
+                console.error("error readFormValues() en id: "+ fm.nombre +" "+ value);
+                console.error(error);
+            }
+        }
+        return request;
+
+    }
+    cleanFormValues() {
+        for (let fm of fieldsModel) {
+            try {
+                switch (fm.type) {
+                    case "radio":
+                        fm.options.forEach(opt => {
+                            let radioElement = document.getElementById(opt);
+                            radioElement.checked = false;
+                        });
+                        break;
+
+                    case "checkbox":
+                        document.getElementById(fm.nombre).checked = false;
+                        break;
+
+                    default:
+                        document.getElementById(fm.nombre).value = "";
+                        break;
+                }
+            } catch (error) {
+                console.error("error cleanFormValues() en id: "+ fm.nombre);
+                console.error(error);
+            }
+        }
     }
     // #endregion
 
@@ -61,34 +180,13 @@ export class Form {
             this.fields.push(fInst);
             this.fieldContElement.appendChild(fInst.element);
         });
-        console.log("fields: ",this.fields)
+        console.log("%cFields instances: ", "color: green", this.fields)
     }
     // #endregion
 
     // #region Buttons
-    newDataInForm() {
-        this.formOpen();
-        this.formElement.setAttribute("style", `top: 80px;`);
-        this.titleElement.innerText = "Nuevo item";
-    }
-    editDataInForm(id, trElement) {
-        let item = MemoryManager.instance.data.find(row => row.id == id);
-        console.log(item)
-
-        this.formOpen();
-        this.formElement.setAttribute("style", `top: ${trElement.offsetTop + 80}px;`);
-        this.titleElement.innerText = "Editar ID: " + id;
-    }
-    cancelEditDataInForm() {
-        this.formClose();
-
-        let rows = document.querySelectorAll("tbody tr");
-        for (let row of rows) {
-            row.classList.remove("active");
-        }
-    }
-
     setButons() {
+        // this.formElement.onclick = this.onSubmit;
         document.getElementById("btnSubmit").onclick = this.onSubmit;
         document.getElementById("btnRemove").onclick = this.onRemove;
         document.getElementById("btnCancel").onclick = this.onCancel;
@@ -101,7 +199,8 @@ export class Form {
     }
     onSubmit() {
         event.preventDefault();
-        console.log("Guardar")
+        // let dto = MemoryManager.instance.formInstance.readFormValues();
+        MemoryManager.instance.saveData();
     }
     onRemove() {
         event.preventDefault();
@@ -111,5 +210,7 @@ export class Form {
         MemoryManager.instance.formInstance.cancelEditDataInForm();
     }
     // #endregion
+
+
 
 }

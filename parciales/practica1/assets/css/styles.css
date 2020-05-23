@@ -54,6 +54,10 @@ h2 {
   color: #e42861;
 }
 
+.hidden {
+  display: none;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -169,7 +173,7 @@ tr {
   -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
   box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
   margin-bottom: 30px;
-  padding: 30px 20px;
+  padding: 30px 30px;
   border-radius: 5px;
   height: auto;
   max-height: 500%;
@@ -177,9 +181,26 @@ tr {
   transition-timing-function: ease-in-out;
   overflow: hidden;
 }
+.form.edit h2:before {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 29px;
+  content: " ";
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 15px solid #e42861;
+  transition: border-left-color 50ms;
+  transition-timing-function: ease-in-out;
+}
 .form.close {
   max-height: 0;
-  padding: 0 20px;
+  padding: 0 30px;
+}
+.form.close h2:before {
+  border-left-color: transparent;
 }
 .form .fieldContainer {
   width: 100%;
@@ -207,7 +228,7 @@ tr {
 .form .field select,
 .form .field input {
   border-radius: 3px;
-  border: 1px solid grey;
+  border: 1px solid #ddd;
   padding: 3px 8px;
   font-size: 14px;
   font-weight: 300;

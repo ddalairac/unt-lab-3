@@ -1,27 +1,28 @@
 export const fieldsModel = [
+    { type: "number", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: false, min: 1 },
     { type: "text", nombre: "text", placeholder: "Ingrese texto", isRequired: true, isDisabled: false, maxlength: 10 },
-    { type: "email", nombre: "email", placeholder: "Ingrese email", isRequired: true, isDisabled: false, maxlength: 10 },
+    { type: "email", nombre: "email", placeholder: "Ingrese email", isRequired: true, isDisabled: false, maxlength: 40 },
     { type: "number", nombre: "number", placeholder: "Ingrese numero", isRequired: true, isDisabled: false, min: 1, max: 5 },
     { type: "date", nombre: "date", placeholder: "Ingrese fecha", isRequired: true, isDisabled: false, min: "2000-01-02", max: "2020-12-31" },
     { type: "checkbox", nombre: "checkbox", placeholder: "Ingrese checkbox", isRequired: true, isDisabled: false },
     { type: "textarea", nombre: "textarea", placeholder: "Ingrese textarea", isRequired: true, isDisabled: false, rows: 4 },
-    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, options:["Hombre","mujer","otro"]},
-    { type: "select", nombre: "select", placeholder: "selecione una opcion", isRequired: true, isDisabled: false, options:["Hombre","mujer","otro"]},
+    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, options:["Hombre","Mujer","Otro"]},
+    { type: "select", nombre: "select", placeholder: "selecione una opcion", isRequired: true, isDisabled: false, options:["Argentina","Chile","Brasil"]},
 
 
-    // { type: "number", nombre: "Id", placeholder: "", isRequired: false, isDisabled: true },
-    // { type: "email", nombre: "Titulo", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "text", nombre: "Transaccion", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "text", nombre: "Descripcion", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "number", nombre: "Precio", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "text", nombre: "Num_Wc", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "text", nombre: "Num_Estacionamiento", placeholder: "ingrese ", isRequired: true, isDisabled: false },
-    // { type: "text", nombre: "Num_Dormitorio", placeholder: "ingrese ", isRequired: true, isDisabled: false },
+    // { type: "number", nombre: "id", placeholder: "", isRequired: false, isDisabled: true },
+    // { type: "text", nombre: "titulo", placeholder: "Ingrese el titulo", isRequired: true, isDisabled: false },
+    // { type: "radio", nombre: "transaccion", placeholder: "tipo de operacion", isRequired: false, isDisabled: false, options: ["venta", "alquiler"] },
+    // { type: "textarea", nombre: "descripcion", placeholder: "Ingrese una descripciond e la propiedad", isRequired: true, isDisabled: false, rows: 4 },
+    // { type: "number", nombre: "precio", placeholder: "Ingrese el precio", isRequired: true, isDisabled: false, min: 1000 },
+    // { type: "number", nombre: "num_wc", placeholder: "Ingrese Cantidad", isRequired: true, isDisabled: false, min: 0 },
+    // { type: "number", nombre: "num_estacionamiento", placeholder: "Ingrese Cantidad", isRequired: true, isDisabled: false, min: 0 },
+    // { type: "number", nombre: "num_dormitorio", placeholder: "Ingrese Cantidad", isRequired: true, isDisabled: false, min: 0, max: 5 },
 ]
 
 /*
 text, email :: maxlength="10"
-number      :: min="1" max="5"
+number      :: min="0" max="5"
 textarea:   :: rows="10"
 checkbox
 date        :: min="2000-01-02" max="2020-12-31"

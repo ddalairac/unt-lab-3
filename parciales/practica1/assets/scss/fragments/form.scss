@@ -10,7 +10,7 @@
     -moz-box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.5);
     margin-bottom: 30px;
-    padding: 30px 20px;
+    padding: 30px 30px;
     border-radius: 5px;
     height: auto;
     max-height: 500%;
@@ -18,9 +18,29 @@
     transition-timing-function: ease-in-out;
     overflow: hidden;
 
+    &.edit {
+        h2:before {
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            top: 29px;
+            content: " ";
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid $colorMagenta;
+            transition: border-left-color 50ms;
+            transition-timing-function: ease-in-out;
+        }
+    }
     &.close {
         max-height: 0;
-        padding: 0 20px;
+        padding: 0 30px;
+        h2:before {
+            border-left-color: transparent;
+            // left: -15px;
+        }
     }
     .fieldContainer {
         width: 100%;
@@ -49,7 +69,7 @@
         select,
         input {
             border-radius: 3px;
-            border: 1px solid grey;
+            border: 1px solid $colorBorder;
             padding: 3px 8px;
             font-size: 14px;
             font-weight: 300;
@@ -63,7 +83,7 @@
                 min-height: unset;
                 margin-left: 0;
             }
-            label{
+            label {
                 margin-right: 8px;
             }
             p {

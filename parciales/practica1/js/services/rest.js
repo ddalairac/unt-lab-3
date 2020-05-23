@@ -4,7 +4,7 @@ export class restXHR {
     static async get(resource) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("restXHR.get");
+            console.log("%crestXHR.get","color:blue");
             let xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = () => {
@@ -28,7 +28,7 @@ export class restXHR {
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("restXHR.post");
+            console.log("%crestXHR.post","color:blue");
             // defaults
             let rBody;
             let rHeader;
@@ -85,7 +85,7 @@ export class restFetch {
     
 
     static async get(resource) {
-        console.log("restFetch.get");
+        console.log("%crestFetch.get","color:blue");
         loading.addL();
         return new Promise((resolve, reject) => {
             fetch(`${restXHR.url}${resource}`)
@@ -93,7 +93,7 @@ export class restFetch {
                     return res.json()
                 })
                 .then((data) => {
-                    console.log("data", data)
+                    console.log("%cResponse: ","color:blue", data);
                     loading.removeL();
                     resolve(data)
                 })
@@ -108,7 +108,7 @@ export class restFetch {
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("restFetch.post");
+            console.log("%crestFetch.post","color:blue");
             // defaults
             let rBody;
             let rHeader;
@@ -129,7 +129,7 @@ export class restFetch {
                     return res.json()
                 })
                 .then((data) => {
-                    console.log("data", data)
+                    console.log("%cResponse: ","color:blue", data);
                     loading.removeL();
                     resolve(data)
                 })
