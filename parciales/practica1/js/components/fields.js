@@ -22,7 +22,6 @@ export class Field {
     nombre;
     type;
     placeholder;
-    value;
     isRequired;
     isDisabled;
 }
@@ -162,18 +161,18 @@ export class FieldRadio extends Field {
         fieldEl.classList.add("field");
         fieldEl.classList.add("radio");
 
+        let disabled = this.isDisabled ? `disabled` : '';
         let optionsElements = "";
         this.options.forEach(option => {
             optionsElements += `
-            <input type="radio" id="${option}" name="${this.nombre}" value="${option}" >
+            <input type="radio" id="${option}" name="${this.nombre}" value="${option}" ${disabled}>
             <label for="${option}">${option.toLowerCase().split('_').join(' ')}</label>`
         });
         fieldEl.innerHTML = `
                 <p>${this.placeholder}</p>
                 ${optionsElements}`;
-        console.log(fieldEl.childNodes)
         let inputEl = fieldEl.childNodes[3];
-        inputEl.disabled = this.isDisabled;
+        // inputEl.disabled = this.isDisabled;
         inputEl.required = this.isRequired;
 
         this.element = fieldEl;
@@ -201,7 +200,6 @@ export class FieldSelect extends Field {
                 <select id="${this.nombre}" name="${this.nombre}">
                     ${optionsElements}
                 </select>`;
-        console.log(fieldEl.childNodes)
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
         inputEl.required = this.isRequired;

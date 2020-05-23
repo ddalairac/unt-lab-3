@@ -211,10 +211,18 @@ tr {
   padding: 3px 8px;
   font-size: 14px;
   font-weight: 300;
+  min-height: 28px;
 }
 .form .field.radio, .form .field.checkbox {
   flex-direction: row;
   align-content: flex-end;
+}
+.form .field.radio input, .form .field.checkbox input {
+  min-height: unset;
+  margin-left: 0;
+}
+.form .field.radio label, .form .field.checkbox label {
+  margin-right: 8px;
 }
 .form .field.radio p, .form .field.checkbox p {
   margin: 0 0 9px;

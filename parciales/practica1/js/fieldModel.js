@@ -1,5 +1,6 @@
 export const fieldsModel = [
-    { type: "text", nombre: "text_email", placeholder: "Ingrese texto o email", isRequired: true, isDisabled: false, maxlength: 10 },
+    { type: "text", nombre: "text", placeholder: "Ingrese texto", isRequired: true, isDisabled: false, maxlength: 10 },
+    { type: "email", nombre: "email", placeholder: "Ingrese email", isRequired: true, isDisabled: false, maxlength: 10 },
     { type: "number", nombre: "number", placeholder: "Ingrese numero", isRequired: true, isDisabled: false, min: 1, max: 5 },
     { type: "date", nombre: "date", placeholder: "Ingrese fecha", isRequired: true, isDisabled: false, min: "2000-01-02", max: "2020-12-31" },
     { type: "checkbox", nombre: "checkbox", placeholder: "Ingrese checkbox", isRequired: true, isDisabled: false },

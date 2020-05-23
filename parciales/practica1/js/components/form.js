@@ -4,6 +4,7 @@ import { fieldsModel } from '../fieldModel.js';
 export class Form {
 
     constructor() {
+        this.fields = []
         this.formElement = document.querySelector(".form");
         this.btnNewElement = document.getElementById("btnNew");
         this.titleElement = document.getElementById("formTitle");
@@ -13,6 +14,7 @@ export class Form {
     }
     formElement;
     fieldContElement;
+    fields;
     btnNewElement;
     titleElement;
 
@@ -32,7 +34,6 @@ export class Form {
     renderFields() {
         fieldsModel.forEach(field => {
             let fInst;
-            // console.log(field)
             switch (field.type) {
                 case "number":
                     fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.min, field.max);
@@ -57,8 +58,10 @@ export class Form {
                     fInst = new FieldTextEmail(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.type, field.maxlength);
                     break;
             }
+            this.fields.push(fInst);
             this.fieldContElement.appendChild(fInst.element);
         });
+        console.log("fields: ",this.fields)
     }
     // #endregion
 
@@ -71,7 +74,6 @@ export class Form {
     editDataInForm(id, trElement) {
         let item = MemoryManager.instance.data.find(row => row.id == id);
         console.log(item)
-        console.log(trElement.offsetTop)
 
         this.formOpen();
         this.formElement.setAttribute("style", `top: ${trElement.offsetTop + 80}px;`);
@@ -99,6 +101,7 @@ export class Form {
     }
     onSubmit() {
         event.preventDefault();
+        console.log("Guardar")
     }
     onRemove() {
         event.preventDefault();
