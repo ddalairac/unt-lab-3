@@ -20,5 +20,16 @@
         "num_estacionamiento": "4",
         "num_dormitorio": "7",
         "active": "true"
+    },
+    {
+        "id": "3",
+        "titulo": "Casucha de cuarta",
+        "transaccion": "alquiler",
+        "descripcion": "Mansion de cuarta con 4 paredes a un precio demasiado alto para lo que es. Ideal para pasarla mal",
+        "precio": "$1000",
+        "num_wc": "1",
+        "num_estacionamiento": "0",
+        "num_dormitorio": "1",
+        "active": "true"
     }
 ]

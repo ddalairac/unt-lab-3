@@ -35,6 +35,7 @@
                 }
                 array = JSON.parse(data);
                 array = array.filter(function (a) {
+                    console.log(a.active)
                     return a.active == true || a.active == "true";
                 });
                 array.forEach(element => {
@@ -69,9 +70,11 @@
             let array;
             require('fs').readFile(__dirname + '\\data\\data.json', 'utf8', function (err, data) {
                 if (err) {
+                    // console.log("err",err)
                     // error handling
                 }
                 array = JSON.parse(data);
+                // console.log("array",array)
                 var objectToDelete = array.filter(function (a) {
                     return a.id == id;
                 });
