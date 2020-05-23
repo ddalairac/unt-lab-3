@@ -67,13 +67,13 @@ export class Form {
                     case "radio":
                         fm.options.forEach(opt => {
                             let element = document.getElementById(opt);
-                            element.checked = (formData[fm.nombre] == element.value) 
+                            element.checked = (formData[fm.nombre] == element.value)
                         });
                         break;
                     case "select":
                         fm.options.forEach(opt => {
                             let element = document.getElementById(opt);
-                            element.selected = (formData[fm.nombre] == element.value) 
+                            element.selected = (formData[fm.nombre] == element.value)
                         });
                         break;
                     case "checkbox":
@@ -85,7 +85,7 @@ export class Form {
                         break;
                 }
             } catch (error) {
-                console.error("error populateFormValues() en id: "+ fm.nombre);
+                console.error("error populateFormValues() en id: " + fm.nombre);
                 console.error(error);
             }
         }
@@ -122,35 +122,38 @@ export class Form {
                 keyValue = { [fm.nombre]: value };
                 request = { ...request, ...keyValue };
             } catch (error) {
-                console.error("error readFormValues() en id: "+ fm.nombre +" "+ value);
+                console.error("error readFormValues() en id: " + fm.nombre + " " + value);
                 console.error(error);
             }
         }
         return request;
 
     }
-    cleanFormValues() {
+    cleanFormValues(cleanID = true) {
         for (let fm of fieldsModel) {
-            try {
-                switch (fm.type) {
-                    case "radio":
-                        fm.options.forEach(opt => {
-                            let radioElement = document.getElementById(opt);
-                            radioElement.checked = false;
-                        });
-                        break;
+            console.log(!(!cleanID && fm.nombre == "id"))
+            if (!(!cleanID && fm.nombre == "id")) {
+                try {
+                    switch (fm.type) {
+                        case "radio":
+                            fm.options.forEach(opt => {
+                                let radioElement = document.getElementById(opt);
+                                radioElement.checked = false;
+                            });
+                            break;
 
-                    case "checkbox":
-                        document.getElementById(fm.nombre).checked = false;
-                        break;
+                        case "checkbox":
+                            document.getElementById(fm.nombre).checked = false;
+                            break;
 
-                    default:
-                        document.getElementById(fm.nombre).value = "";
-                        break;
+                        default:
+                            document.getElementById(fm.nombre).value = "";
+                            break;
+                    }
+                } catch (error) {
+                    console.error("error cleanFormValues() en id: " + fm.nombre);
+                    console.error(error);
                 }
-            } catch (error) {
-                console.error("error cleanFormValues() en id: "+ fm.nombre);
-                console.error(error);
             }
         }
     }
@@ -196,6 +199,7 @@ export class Form {
         // this.formElement.onclick = this.onSubmit;
         document.getElementById("btnSubmit").onclick = this.onSubmit;
         document.getElementById("btnRemove").onclick = this.onRemove;
+        document.getElementById("btnClear").onclick = this.onClear;
         document.getElementById("btnCancel").onclick = this.onCancel;
         document.getElementById("btnCancelX").onclick = this.onCancel;
         document.getElementById("btnNew").onclick = this.onNew;
@@ -211,12 +215,16 @@ export class Form {
     }
     onRemove() {
         event.preventDefault();
-        if(confirm("¿Esta seguro que desea eliminar los datos?"))
+        if (confirm("¿Esta seguro que desea eliminar los datos?"))
             MemoryManager.instance.removeData();
     }
     onCancel() {
         event.preventDefault();
         MemoryManager.instance.formInstance.cancelEditDataInForm();
+    }
+    onClear() {
+        event.preventDefault();
+        MemoryManager.instance.formInstance.cleanFormValues(false);
     }
     // #endregion
 

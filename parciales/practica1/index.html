@@ -13,82 +13,28 @@
     <meta property="og:description" content="UTN, Lab 3, Practica parcial, CRUD js" />
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="assets/css/styles.css">
     <script src="./main.js" type="module"></script>
 </head>
 
 <body>
     <div id="container">
-        <h1>Lab 3 Parcial 
-            <button id="btnNew" class="secondary" ><i class="fas fa-plus"></i> Nuevo item </button>
+        <h1>Lab 3 Parcial
+            <button id="btnNew" class="secondary"><i class="fas fa-plus"></i> Nuevo item </button>
         </h1>
         <form class="form close" action="#" method="post">
             <button id="btnCancelX" class="btnClose" title="Cancelar"><i class="fas fa-times"></i></button>
             <h2 id="formTitle"></h2>
-
             <div class="fieldContainer"></div>
- 
-            <!-- <div class="field">
-                <label for="nombre">nombre</label>
-                <input placeholder="nombre" type="text" id="nombre" name="nombre" value="" required disabled>
-            </div>
-
-            <div class="field">
-                <label for="numero">numero</label>
-                <input placeholder="numero" type="number" id="numero" name="numero" value="" min="1" max="5" required>
-            </div>
-
-            <div class="field">
-                <label for="birthday">Birthday:</label>
-                <input placeholder="birthday" type="date" id="birthday" name="birthday" min="2000-01-02" max="2020-12-31" required>
-            </div>
-
-            <div class="field radio">
-                <p>Genero</p>
-                <input type="radio" id="male" name="gender" value="male" required>
-                <label for="male">Male</label>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="female">Female</label>
-                <input type="radio" id="other" name="gender" value="other">
-                <label for="other">Other</label>
-            </div>
-
-            <div class="field">
-                <label for="email">Enter your email:</label>
-                <input placeholder="email" type="email" id="email" name="email" required>
-            </div>
-
-            <div class="field checkbox">
-                <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-                <label for="vehicle1"> I have a bike</label>
-            </div>
-
-            <div class="field">
-                <label for="lista">lista</label>
-                <select id="lista" name="lista">
-                    <option value="xxx">vvv</option>
-                    <option value="xxx">vvv</option>
-                    <option value="xxx">vvv</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label for="texto">texto</label>
-                <textarea placeholder="texto" id="texto" name="texto" rows="10" cols="30"></textarea>
-            </div>  -->
-
-
             <div class="actions">
                 <button id="btnRemove" class="primary outline">Eliminar</button>
+                <button id="btnClear" class="primary outline">Limpiar</button>
                 <button id="btnCancel" class="primary outline hidden">Cancelar</button>
                 <button id="btnSubmit" type="submit" class="primary">Guardar</button>
             </div>
-
         </form>
-
-
-
     </div><!-- container -->
 
 </body>
