@@ -18,7 +18,6 @@ export class MemoryManager {
     }
     static _instance;
 
-    // _selectedRowElement;
     tableElement;
     containerElement;
     formInstance;
@@ -53,7 +52,6 @@ export class MemoryManager {
                 this.containerElement.appendChild(this.tableElement);
             }
         )
-        // .catch(() => { alert("No se pudieron obtener los datos"); });
     }
     saveEditData() {
         let dto = this.formInstance.readFormValues();
@@ -67,7 +65,6 @@ export class MemoryManager {
                     this.readAndRender()
                 }
             )
-            // .catch(() => { alert("No se pudieron guardar los datos"); });
 
         } else {
             console.log("%cDTO New: ", "color:blue", dto)
@@ -78,7 +75,6 @@ export class MemoryManager {
                     this.readAndRender()
                 }
             )
-            // .catch(() => { alert("No se pudo completar la operacion"); });
         }
     }
     removeData() {
@@ -94,7 +90,6 @@ export class MemoryManager {
                 this.readAndRender()
             }
         )
-        // .catch(() => { alert("No se pudo eliminar el item"); });
     }
 
 }

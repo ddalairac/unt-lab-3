@@ -45,7 +45,7 @@ export class Form {
         this.populateFormValues(formData)
 
         this.formOpen();
-        this.formElement.setAttribute("style", `top: ${topPosition + 80}px;`);
+        this.formElement.setAttribute("style", `top: ${topPosition + 70}px;`);
         this.formElement.classList.add("edit");
         this.titleElement.innerHTML = `<i class='fas fa-edit'></i> Editar ID: ${formData.id}`;
         document.getElementById("btnSubmit").innerText = "Guardar";

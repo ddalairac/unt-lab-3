@@ -38,21 +38,24 @@ export class Table {
     }
 
     static rowClick() {
-        let rows = document.querySelectorAll("tbody tr");
-        let index = 0
-        for (let row of rows) {
-            if (row == event.path[1]) {
-                if (row.classList.contains("active")) {
-                    row.classList.remove("active");
-                    MemoryManager.instance.formInstance.cancelEditDataInForm();
-                } else {
-                    MemoryManager.instance.formInstance.editDataInForm(index, row.offsetTop);
-                    row.classList.add("active");
+        
+        if (MemoryManager.instance.formInstance.formElement.classList.contains("close")) {
+            let rows = document.querySelectorAll("tbody tr");
+            let index = 0
+            for (let row of rows) {
+                if (row == event.path[1]) {
+                    // if (row.classList.contains("active")) {
+                    //     row.classList.remove("active");
+                    //     MemoryManager.instance.formInstance.cancelEditDataInForm();
+                    // } else {
+                        MemoryManager.instance.formInstance.editDataInForm(index, row.offsetTop);
+                        row.classList.add("active");
+                    // }
+                // } else {
+                //     row.classList.remove("active");
                 }
-            } else {
-                row.classList.remove("active");
+                index++;
             }
-            index++;
         }
     }
 }
