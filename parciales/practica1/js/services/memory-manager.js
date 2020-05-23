@@ -25,28 +25,23 @@ export class MemoryManager {
     data;
     selectID
 
-    // get selectedRowElement() {
-    //     return this._selectedRowElement;
-    // }
-    // set selectedRowElement(selRoeEl) {
-    //     console.log("selRoeEl",selRoeEl) 
-    //     this._selectedRowElement = selRoeEl;
-    //     if (selRoeEl) {
-    //         for (const dom of selRoeEl.childNodes) {
-    //             if (dom.getAttribute("data-before") == "id") {
-    //                 console.log("selectID: " + dom.innerText);
-    //                 this.selectID = parseInt(dom.innerText);
-    //                 this.formInstance.editDataInForm(this.selectID, selRoeEl);
-    //             }
-    //         }
-    //     } else {
-    //         this.formInstance.cancelEditDataInForm();
-    //         this.selectID = null;
-    //     }
-    // }
+    validateTypes() {
+        console.log("%cValidate types", "color: green;")
+        if (this.data[0]) {
+            for (let rItem in this.data[0]) {
+                let valid = false;
+                for (let fm of fieldsModel) {
+                    if (fm.nombre == rItem) valid = true;
+                    // console.log("  -",fm.nombre)
+                }
+                let validColor = valid ? "green" : "red";
+                console.log(`  ${rItem}:%c ${valid}`, `color: ${validColor};`);
+            }
+        }
+    }
     readAndRender() {
-        // restXHR.get("traer").then(
-        restFetch.get("traer").then(
+        restXHR.get("traer").then(
+        // restFetch.get("traer").then(
             (response) => {
                 if (!this.containerElement)
                     this.containerElement = document.getElementById("container");
@@ -58,28 +53,48 @@ export class MemoryManager {
                 this.containerElement.appendChild(this.tableElement);
             }
         )
+        // .catch(() => { alert("No se pudieron obtener los datos"); });
     }
-    validateTypes() {
-        console.log("%cValidate types", "color: green;")
-        if (this.data[0]) {
-            for (let rItem in this.data[0]) {
-                let valid = false;
-                for (let fm of fieldsModel) {
-                    if (fm.nombre == rItem) valid = true;
-                    // console.log("  -",fm.nombre)
+    saveEditData() {
+        let dto = this.formInstance.readFormValues();
+        if (this.formInstance.isEdit) {
+            console.log("%cDTO Edit: ", "color:blue", dto)
+            // restXHR.post("modificar", dto).then(
+            restFetch.post("modificar", dto).then(
+                () => {
+                    console.log("this: ",this)
+                    this.formInstance.formClose();
+                    this.readAndRender()
                 }
-                let validColor = valid ? "green" : "red";
-                console.log(`%cres ${rItem}": ${valid}`, `color: ${validColor};`);
-            }
+            )
+            // .catch(() => { alert("No se pudieron guardar los datos"); });
+
+        } else {
+            console.log("%cDTO New: ", "color:blue", dto)
+            restXHR.post("alta", dto).then(
+            // restFetch.post("alta", dto).then(
+                () => {
+                    this.formInstance.formClose();
+                    this.readAndRender()
+                }
+            )
+            // .catch(() => { alert("No se pudo completar la operacion"); });
         }
     }
-    saveData() {
+    removeData() {
         let dto = this.formInstance.readFormValues();
-        console.log("save data ")
-        console.log("%cDTO: ", "color:blue", dto)
-        restFetch.post("modificar",dto).then( 
-            this.readAndRender() 
+        let params = `id=${dto.id}`;
+        console.log("%cDelete: ", "color:blue", params)
+        let header = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
+        restXHR.post("baja", params, header).then(
+        // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
+        // restFetch.post("baja", params, headerFetch).then(
+            () => {
+                this.formInstance.formClose();
+                this.readAndRender()
+            }
         )
+        // .catch(() => { alert("No se pudo eliminar el item"); });
     }
 
 }

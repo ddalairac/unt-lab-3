@@ -4,7 +4,7 @@ export class restXHR {
     static async get(resource) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("%crestXHR.get","color:blue");
+            console.log("%crestXHR.get", "color:blue");
             let xhr = new XMLHttpRequest();
 
             xhr.onreadystatechange = () => {
@@ -16,7 +16,9 @@ export class restXHR {
                         resolve(JSON.parse(xhr.responseText))
                     } else {
                         console.log(xhr.status + " " + xhr.statusText)
-                        reject(JSON.parse(xhr.responseText))
+                        // reject(JSON.parse(xhr.responseText))
+                        resolve(null);
+                        alert("No se pudieron obtener los datos");
                     }
                 }
             }
@@ -28,7 +30,7 @@ export class restXHR {
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("%crestXHR.post","color:blue");
+            console.log("%crestXHR.post", "color:blue");
             // defaults
             let rBody;
             let rHeader;
@@ -50,7 +52,9 @@ export class restXHR {
                         resolve(JSON.parse(xhr.responseText))
                     } else {
                         console.log(xhr.status + " " + xhr.statusText)
-                        reject(JSON.parse(xhr.responseText))
+                        // reject(JSON.parse(xhr.responseText))
+                        resolve(null);
+                        alert("No se pudo completar la operacion");
                     }
                 }
             }
@@ -64,7 +68,7 @@ export class restXHR {
     }
 
 }
-export class loading{
+export class loading {
     static addL() {
         let loadingEl = document.createElement('div');
         loadingEl.classList.add("loading");
@@ -82,10 +86,10 @@ export class loading{
 export class restFetch {
     static url = "http://localhost:3000/";
 
-    
+
 
     static async get(resource) {
-        console.log("%crestFetch.get","color:blue");
+        console.log("%crestFetch.get", "color:blue");
         loading.addL();
         return new Promise((resolve, reject) => {
             fetch(`${restXHR.url}${resource}`)
@@ -93,14 +97,16 @@ export class restFetch {
                     return res.json()
                 })
                 .then((data) => {
-                    console.log("%cResponse: ","color:blue", data);
+                    console.log("%cResponse: ", "color:blue", data);
                     loading.removeL();
                     resolve(data)
                 })
                 .catch((err) => {
-                    console.error("Error get: " + resource, err);
+                    // console.error("Error get: " + resource, err);
                     loading.removeL();
-                    reject(err);
+                    // reject(err);
+                    resolve(null);
+                    alert("No se pudieron obtener los datos");
                 })
         })
     }
@@ -108,7 +114,7 @@ export class restFetch {
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
-            console.log("%crestFetch.post","color:blue");
+            console.log("%crestFetch.post", "color:blue");
             // defaults
             let rBody;
             let rHeader;
@@ -129,14 +135,16 @@ export class restFetch {
                     return res.json()
                 })
                 .then((data) => {
-                    console.log("%cResponse: ","color:blue", data);
+                    console.log("%cResponse: ", "color:blue", data);
                     loading.removeL();
                     resolve(data)
                 })
                 .catch((err) => {
-                    console.error("Error post: " + resource, err);
+                    // console.error("Error post: " + resource, err);
                     loading.removeL();
-                    reject(err);
+                    // reject(err);
+                    resolve(null);
+                    alert("No se pudo completar la operacion");
                 })
         })
     }

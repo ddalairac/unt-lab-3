@@ -17,6 +17,7 @@ export class Form {
     fields;
     btnNewElement;
     titleElement;
+    isEdit;
 
     // #region Form
     formOpen() {
@@ -32,10 +33,11 @@ export class Form {
     newDataInForm() {
         this.formOpen();
         this.formElement.setAttribute("style", `top: 80px;`);
-        this.titleElement.innerText = "Nuevo item";
+        this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo item`;
         this.formElement.classList.remove("edit");
         document.getElementById("btnSubmit").innerText = "Aceptar";
         document.getElementById("btnRemove").classList.add("hidden");
+        this.isEdit = false;
     }
     // editDataInForm(id, trElement) {
     editDataInForm(index, topPosition) {
@@ -45,9 +47,10 @@ export class Form {
         this.formOpen();
         this.formElement.setAttribute("style", `top: ${topPosition + 80}px;`);
         this.formElement.classList.add("edit");
-        this.titleElement.innerText = "Editar ID: " + formData.id;
+        this.titleElement.innerHTML = `<i class='fas fa-edit'></i> Editar ID: ${formData.id}`;
         document.getElementById("btnSubmit").innerText = "Guardar";
         document.getElementById("btnRemove").classList.remove("hidden");
+        this.isEdit = true;
     }
     cancelEditDataInForm() {
         this.formClose();
@@ -106,6 +109,10 @@ export class Form {
 
                     case "checkbox":
                         value = document.getElementById(fm.nombre).checked;
+                        break;
+
+                    case "number":
+                        value = parseInt(document.getElementById(fm.nombre).value);
                         break;
 
                     default:
@@ -200,10 +207,12 @@ export class Form {
     onSubmit() {
         event.preventDefault();
         // let dto = MemoryManager.instance.formInstance.readFormValues();
-        MemoryManager.instance.saveData();
+        MemoryManager.instance.saveEditData();
     }
     onRemove() {
         event.preventDefault();
+        if(confirm("¿Esta seguro que desea eliminar los datos?"))
+            MemoryManager.instance.removeData();
     }
     onCancel() {
         event.preventDefault();

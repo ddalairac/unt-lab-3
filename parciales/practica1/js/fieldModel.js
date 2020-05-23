@@ -1,5 +1,5 @@
 export const fieldsModel = [
-    { type: "number", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: false, min: 1 },
+    { type: "number", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: true, min: 1 },
     { type: "text", nombre: "text", placeholder: "Ingrese texto", isRequired: true, isDisabled: false, maxlength: 10 },
     { type: "email", nombre: "email", placeholder: "Ingrese email", isRequired: true, isDisabled: false, maxlength: 40 },
     { type: "number", nombre: "number", placeholder: "Ingrese numero", isRequired: true, isDisabled: false, min: 1, max: 5 },
