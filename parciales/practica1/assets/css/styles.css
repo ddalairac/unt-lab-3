@@ -54,10 +54,6 @@ h2 {
   color: #e42861;
 }
 
-.hidden {
-  display: none;
-}
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -354,6 +350,10 @@ button.btnClose {
   top: 17px;
   height: 34px;
   width: 34px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /*# sourceMappingURL=styles.css.map */

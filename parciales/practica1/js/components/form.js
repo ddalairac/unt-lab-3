@@ -167,26 +167,26 @@ export class Form {
             let fInst;
             switch (field.type) {
                 case "number":
-                    fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.min, field.max);
+                    fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min, field.max);
                     break;
                 case "date":
-                    fInst = new FieldDate(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.min, field.max);
+                    fInst = new FieldDate(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min, field.max);
                     break;
                 case "checkbox":
-                    fInst = new FieldCheckbox(field.nombre, field.placeholder, field.isRequired, field.isDisabled);
+                    fInst = new FieldCheckbox(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible);
                     break;
                 case "textarea":
-                    fInst = new FieldTextarea(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.rows, field.cols);
+                    fInst = new FieldTextarea(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.rows, field.cols);
                     break;
                 case "radio":
-                    fInst = new FieldRadio(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.options);
+                    fInst = new FieldRadio(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.options);
                     break;
                 case "select":
-                    fInst = new FieldSelect(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.options);
+                    fInst = new FieldSelect(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.options);
                     break;
 
                 default:
-                    fInst = new FieldTextEmail(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.type, field.maxlength);
+                    fInst = new FieldTextEmail(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.type, field.maxlength);
                     break;
             }
             this.fields.push(fInst);

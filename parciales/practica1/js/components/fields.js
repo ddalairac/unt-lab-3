@@ -6,7 +6,7 @@
     *  @param isDisabled: boolean.
  */
 export class Field {
-    constructor(nombre, placeholder = "", isRequired = false, isDisabled = false) {
+    constructor(nombre, placeholder = "", isRequired = false, isDisabled = false, isVisible = true) {
         if (!nombre) {
             throw "El nombre del field no definido";
         }
@@ -16,6 +16,7 @@ export class Field {
         this.placeholder = placeholder;
         this.isRequired = isRequired;
         this.isDisabled = isDisabled;
+        this.isVisible = isVisible;
     }
     element;
 
@@ -25,18 +26,20 @@ export class Field {
     placeholder;
     isRequired;
     isDisabled;
+    isVisible;
 
-    createFieldElement(){
+    createFieldElement() {
         let fieldEl = document.createElement('div');
         fieldEl.setAttribute("id", `field_${this.nombre}`)
         fieldEl.classList.add("field");
+        if (!this.isVisible) fieldEl.classList.add("hidden");
 
         return fieldEl;
     }
 }
 export class FieldTextEmail extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, type = "text", maxlength = 0) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, type = "text", maxlength = 0) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.type = type;
         this.maxlength = maxlength;
         this.renderField();
@@ -58,8 +61,8 @@ export class FieldTextEmail extends Field {
     }
 }
 export class FieldNumber extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, min, max) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, min, max) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.min = min;
         this.max = max;
         this.renderField();
@@ -91,8 +94,8 @@ export class FieldNumber extends Field {
     }
 }
 export class FieldCheckbox extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.renderField();
     }
     renderField() {
@@ -113,8 +116,8 @@ export class FieldCheckbox extends Field {
     }
 }
 export class FieldTextarea extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, rows = 0) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, rows = 0) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.rows = rows;
         this.renderField();
     }
@@ -136,8 +139,8 @@ export class FieldTextarea extends Field {
     }
 }
 export class FieldDate extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, min = '', max = '') {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, min = '', max = '') {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.min = min;
         this.max = max;
         this.renderField();
@@ -161,8 +164,8 @@ export class FieldDate extends Field {
     }
 }
 export class FieldRadio extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, options = [""]) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, options = [""]) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.options = options;
         this.renderField();
     }
@@ -191,8 +194,8 @@ export class FieldRadio extends Field {
     }
 }
 export class FieldSelect extends Field {
-    constructor(nombre, placeholder, isRequired, isDisabled, options = [""]) {
-        super(nombre, placeholder, isRequired, isDisabled);
+    constructor(nombre, placeholder, isRequired, isDisabled, isVisible, options = [""]) {
+        super(nombre, placeholder, isRequired, isDisabled, isVisible);
         this.options = options;
         this.renderField();
     }
