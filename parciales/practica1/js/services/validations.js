@@ -1,9 +1,6 @@
-// import { MemoryManager } from "./memory-manager.js";
-
 
 export class Validate {
     static cleanErrors() {
-        console.log("cleanErrors")
         let fields = document.querySelectorAll(".field");
         for (let field of fields) {
             field.classList.remove("error");

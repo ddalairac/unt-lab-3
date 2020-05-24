@@ -212,7 +212,6 @@ export class Form {
     }
     onSubmit() {
         event.preventDefault();
-        // let dto = MemoryManager.instance.formInstance.readFormValues();
         MemoryManager.instance.saveEditData();
     }
     onRemove() {
@@ -226,7 +225,8 @@ export class Form {
     }
     onClear() {
         event.preventDefault();
-        MemoryManager.instance.formInstance.cleanFormValues(false);
+        if (confirm("¿Esta seguro que desea vaciar los campos?"))
+            MemoryManager.instance.formInstance.cleanFormValues(false);
     }
     // #endregion
 
