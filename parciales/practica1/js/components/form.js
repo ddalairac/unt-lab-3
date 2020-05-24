@@ -1,6 +1,7 @@
 import { MemoryManager } from "../services/memory-manager.js";
 import { FieldTextEmail, FieldNumber, FieldDate, FieldCheckbox, FieldTextarea, FieldRadio, FieldSelect } from './fields.js';
 import { fieldsModel } from '../fieldModel.js';
+import { Validate } from "../services/validations.js";
 export class Form {
 
     constructor() {
@@ -21,6 +22,7 @@ export class Form {
 
     // #region Form
     formOpen() {
+        Validate.cleanErrors();
         this.formElement.classList.remove("close");
         this.btnNewElement.disabled = true;
     }
@@ -31,6 +33,7 @@ export class Form {
 
     }
     newDataInForm() {
+        this.cleanFormValues();
         this.formOpen();
         this.formElement.setAttribute("style", `top: 80px;`);
         this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo item`;
@@ -41,6 +44,7 @@ export class Form {
     }
     // editDataInForm(id, trElement) {
     editDataInForm(index, topPosition) {
+        this.cleanFormValues();
         let formData = MemoryManager.instance.data[index];
         this.populateFormValues(formData)
 
@@ -54,7 +58,6 @@ export class Form {
     }
     cancelEditDataInForm() {
         this.formClose();
-        this.cleanFormValues();
         let rows = document.querySelectorAll("tbody tr");
         for (let row of rows) {
             row.classList.remove("active");
@@ -131,7 +134,6 @@ export class Form {
     }
     cleanFormValues(cleanID = true) {
         for (let fm of fieldsModel) {
-            console.log(!(!cleanID && fm.nombre == "id"))
             if (!(!cleanID && fm.nombre == "id")) {
                 try {
                     switch (fm.type) {

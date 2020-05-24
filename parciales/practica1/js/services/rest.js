@@ -44,7 +44,7 @@ export class restXHR {
             // call
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = () => {
-                console.log("xhr.readyState", xhr.readyState);
+                // console.log("xhr.readyState", xhr.readyState);
                 if (xhr.readyState == 4) {
                     loading.removeL();
                     if (xhr.status == 200) {

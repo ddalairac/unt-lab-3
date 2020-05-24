@@ -25,6 +25,14 @@ export class Field {
     placeholder;
     isRequired;
     isDisabled;
+
+    createFieldElement(){
+        let fieldEl = document.createElement('div');
+        fieldEl.setAttribute("id", `field_${this.nombre}`)
+        fieldEl.classList.add("field");
+
+        return fieldEl;
+    }
 }
 export class FieldTextEmail extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, type = "text", maxlength = 0) {
@@ -35,12 +43,12 @@ export class FieldTextEmail extends Field {
     }
     maxlength;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         let maxlength = this.maxlength ? `maxlength=${this.maxlength}` : '';
         fieldEl.innerHTML = `
         <label for="${this.nombre}">${this.label}</label>
-        <input id="${this.nombre}" type="${this.type}" name="${this.nombre}" placeholder="${this.placeholder}" ${maxlength}>`;
+        <input id="${this.nombre}" type="${this.type}" name="${this.nombre}" placeholder="${this.placeholder}" ${maxlength}>
+        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
 
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
@@ -59,8 +67,7 @@ export class FieldNumber extends Field {
     min;
     max;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         let minimo
         let maximo
         if (this.min != undefined)
@@ -73,7 +80,8 @@ export class FieldNumber extends Field {
             maximo = '';
         fieldEl.innerHTML = `
         <label for="${this.nombre}">${this.label}</label>
-        <input id="${this.nombre}" type="number" name="${this.nombre}" placeholder="${this.placeholder}" ${minimo} ${maximo}>`;
+        <input id="${this.nombre}" type="number" name="${this.nombre}" placeholder="${this.placeholder}" ${minimo} ${maximo}>
+        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
 
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
@@ -88,14 +96,14 @@ export class FieldCheckbox extends Field {
         this.renderField();
     }
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         fieldEl.classList.add("checkbox");
 
         fieldEl.innerHTML = `
         <p>${this.label}</p>
         <input id="${this.nombre}" type="checkbox" name="${this.nombre}">
-        <label for="${this.nombre}">${this.placeholder}</label>`;
+        <label for="${this.nombre}">${this.placeholder}</label>
+        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
 
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
@@ -112,13 +120,13 @@ export class FieldTextarea extends Field {
     }
     rows;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         fieldEl.classList.add("w-100");
         let rows = this.rows ? `rows="${this.rows}"` : '';
         fieldEl.innerHTML = `
         <label for="${this.nombre}">${this.label}</label>
-        <textarea id="${this.nombre}"${this.placeholder}  type="checkbox" name="${this.nombre}" ${rows} ></textarea>`;
+        <textarea id="${this.nombre}"${this.placeholder}  type="checkbox" name="${this.nombre}" ${rows} ></textarea>
+        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
 
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
@@ -137,13 +145,13 @@ export class FieldDate extends Field {
     min;
     max;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         let minimo = this.min ? `min="${this.min}"` : '';
         let maximo = this.max ? `max="${this.max}"` : '';
         fieldEl.innerHTML = `
         <label for="${this.nombre}">${this.label}</label>
-        <input id="${this.nombre}" type="date" name="${this.nombre}" placeholder="${this.placeholder}" ${minimo} ${maximo}>`;
+        <input id="${this.nombre}" type="date" name="${this.nombre}" placeholder="${this.placeholder}" ${minimo} ${maximo}>
+        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
 
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
@@ -160,8 +168,7 @@ export class FieldRadio extends Field {
     }
     options;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
+        let fieldEl = this.createFieldElement();
         fieldEl.classList.add("radio");
 
         let disabled = this.isDisabled ? `disabled` : '';
@@ -174,7 +181,8 @@ export class FieldRadio extends Field {
         });
         fieldEl.innerHTML = `
                 <p>${this.label}</p>
-                ${optionsElements}`;
+                ${optionsElements}
+                <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
         let inputEl = fieldEl.childNodes[3];
         // inputEl.disabled = this.isDisabled;
         // inputEl.required = this.isRequired;
@@ -190,9 +198,7 @@ export class FieldSelect extends Field {
     }
     options;
     renderField() {
-        let fieldEl = document.createElement('div');
-        fieldEl.classList.add("field");
-
+        let fieldEl = this.createFieldElement();
         let optionsElements = `<option value="" disabled selected hidden>${this.placeholder}</option>`;
         this.options.forEach(option => {
             let label = option.toLowerCase().split('_').join(' ');
@@ -204,7 +210,8 @@ export class FieldSelect extends Field {
                 <label for="${this.nombre}">${this.label}</label>
                 <select id="${this.nombre}" name="${this.nombre}">
                     ${optionsElements}
-                </select>`;
+                </select>
+                <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
         inputEl.required = this.isRequired;

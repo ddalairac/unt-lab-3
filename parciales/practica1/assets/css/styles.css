@@ -249,6 +249,19 @@ tr {
   margin: 0 0 9px;
   width: 100%;
 }
+.form .field .error-msj {
+  color: #e42861;
+  font-size: 14px;
+  margin-top: 6px;
+  display: none;
+  width: 100%;
+}
+.form .field.error input {
+  border-color: #e42861;
+}
+.form .field.error .error-msj {
+  display: block;
+}
 .form .actions {
   width: 100%;
   margin-top: 15px;

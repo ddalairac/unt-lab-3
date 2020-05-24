@@ -1,7 +1,9 @@
 import { Table } from '../components/table.js';
 import { Form } from '../components/form.js';
 import { restXHR, restFetch } from './rest.js';
+import { Validate } from './validations.js';
 import { fieldsModel } from "../fieldModel.js";
+
 export class MemoryManager {
     constructor() {
         if (MemoryManager._instance) {
@@ -25,6 +27,7 @@ export class MemoryManager {
     selectID
 
     validateTypes() {
+        console.log(" ")
         console.log("%cValidate types", "color: green;")
         if (this.data[0]) {
             for (let rItem in this.data[0]) {
@@ -40,7 +43,7 @@ export class MemoryManager {
     }
     readAndRender() {
         restXHR.get("traer").then(
-        // restFetch.get("traer").then(
+            // restFetch.get("traer").then(
             (response) => {
                 if (!this.containerElement)
                     this.containerElement = document.getElementById("container");
@@ -55,36 +58,38 @@ export class MemoryManager {
     }
     saveEditData() {
         let dto = this.formInstance.readFormValues();
-        if (this.formInstance.isEdit) {
-            console.log("%cDTO Edit: ", "color:blue", dto)
-            // restXHR.post("modificar", dto).then(
-            restFetch.post("modificar", dto).then(
-                () => {
-                    console.log("this: ",this)
-                    this.formInstance.formClose();
-                    this.readAndRender()
-                }
-            )
+        if (Validate.form(dto)) {
+            if (this.formInstance.isEdit) {
+                console.log("%cDTO Edit: ", "color:blue", dto)
+                // restXHR.post("modificar", dto).then(
+                restFetch.post("modificar", dto).then(
+                    () => {
+                        console.log("this: ", this)
+                        this.formInstance.formClose();
+                        this.readAndRender()
+                    }
+                )
 
-        } else {
-            console.log("%cDTO New: ", "color:blue", dto)
-            restXHR.post("alta", dto).then(
-            // restFetch.post("alta", dto).then(
-                () => {
-                    this.formInstance.formClose();
-                    this.readAndRender()
-                }
-            )
+            } else {
+                console.log("%cDTO New: ", "color:blue", dto)
+                restXHR.post("alta", dto).then(
+                    // restFetch.post("alta", dto).then(
+                    () => {
+                        this.formInstance.formClose();
+                        this.readAndRender()
+                    }
+                )
+            }
         }
     }
     removeData() {
-        let dto = this.formInstance.readFormValues();
-        let params = `id=${dto.id}`;
+        let id = this.formInstance.readFormValues().id;
+        let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params)
         let header = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
         restXHR.post("baja", params, header).then(
-        // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
-        // restFetch.post("baja", params, headerFetch).then(
+            // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
+            // restFetch.post("baja", params, headerFetch).then(
             () => {
                 this.formInstance.formClose();
                 this.readAndRender()

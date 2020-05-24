@@ -91,6 +91,22 @@
                 width: 100%;
             }
         }
+        .error-msj {
+            color: $colorMagenta;
+            font-size: 14px;
+            margin-top: 6px;
+            display: none;
+            width: 100%;
+        }
+        &.error{
+            input{
+                border-color: $colorMagenta;
+            }
+            .error-msj {
+                display: block;
+            }
+
+        }
     }
     .actions {
         width: 100%;
