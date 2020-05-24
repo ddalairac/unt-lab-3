@@ -1,6 +1,6 @@
 import { MemoryManager } from "../services/memory-manager.js";
 import { FieldTextEmail, FieldNumber, FieldDate, FieldCheckbox, FieldTextarea, FieldRadio, FieldSelect } from './fields.js';
-import { fieldsModel } from '../fieldModel.js';
+import { fieldsModel } from '../config/field-model.js';
 import { Validate } from "../services/validations.js";
 export class Form {
 

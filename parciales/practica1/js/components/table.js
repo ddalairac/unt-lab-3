@@ -1,5 +1,5 @@
 import { MemoryManager } from "../services/memory-manager.js";
-import { fieldsModel } from "../fieldModel.js";
+import { fieldsModel } from "../config/field-model.js";
 
 export class Table {
     static render(tableData) {

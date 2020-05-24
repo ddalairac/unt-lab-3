@@ -2,7 +2,8 @@ import { Table } from '../components/table.js';
 import { Form } from '../components/form.js';
 import { restXHR, restFetch } from './rest.js';
 import { Validate } from './validations.js';
-import { fieldsModel } from "../fieldModel.js";
+import { fieldsModel } from "../config/field-model.js";
+import { ASCIIArt } from '../config/ascii-art.js';
 
 export class MemoryManager {
     constructor() {
@@ -10,8 +11,8 @@ export class MemoryManager {
             throw "No se puede crear otra instancia de MemoryManager";
         }
         MemoryManager._instance = this;
+        console.log(ASCIIArt);
         this.formInstance = new Form();
-
     }
     static get instance() {
         if (!this._instance)
@@ -96,5 +97,4 @@ export class MemoryManager {
             }
         )
     }
-
 }
