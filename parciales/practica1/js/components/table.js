@@ -1,10 +1,15 @@
 import { MemoryManager } from "../services/memory-manager.js";
 import { fieldsModel } from "../config/field-model.js";
 
+/**
+ * Administra el componente tabla
+ */
 export class Table {
+    /* 
+    * Crea el elemento tabla y lo retorna 
+    */
     static render(tableData) {
         let tableEl = document.createElement('table');
-
 
         let theadEl = document.createElement('thead');
         let trEl = document.createElement('tr');
@@ -37,8 +42,14 @@ export class Table {
         return tableEl;
     }
 
+    /** 
+     * Evento Click en row de la tabla
+    */
     static rowClick() {
-        
+        /* 
+        * Inicialmente hice un toogle del row, pero no me parecio una buena experiencia modificar el item a mitad de la edicion,
+        * y lo cambie a que solo seleccione el item. 
+        */
         if (MemoryManager.instance.formInstance.formElement.classList.contains("close")) {
             let rows = document.querySelectorAll("tbody tr");
             let index = 0

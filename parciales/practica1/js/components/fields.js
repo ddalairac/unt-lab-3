@@ -1,11 +1,12 @@
-/** Field de texto o email
+/** Clase base para fields
  * nombre, type, placeholder, isRequired
     *  @param nombre: string.
     *  @param placeholder: string.
     *  @param isRequired: boolean.
     *  @param isDisabled: boolean.
+    *  @param isVisible: boolean.
  */
-export class Field {
+ export class Field {
     constructor(nombre, placeholder = "", isRequired = false, isDisabled = false, isVisible = true) {
         if (!nombre) {
             throw "El nombre del field no definido";
@@ -37,6 +38,10 @@ export class Field {
         return fieldEl;
     }
 }
+
+/**
+ * Administra el componente field text/email
+ */
 export class FieldTextEmail extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, type = "text", maxlength = 0) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -60,6 +65,11 @@ export class FieldTextEmail extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field numero
+ */
 export class FieldNumber extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, min, max) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -93,6 +103,11 @@ export class FieldNumber extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field checkbox
+ */
 export class FieldCheckbox extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -115,6 +130,11 @@ export class FieldCheckbox extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field textarea
+ */
 export class FieldTextarea extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, rows = 0) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -138,6 +158,11 @@ export class FieldTextarea extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field date
+ */
 export class FieldDate extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, min = '', max = '') {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -163,6 +188,11 @@ export class FieldDate extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field radio
+ */
 export class FieldRadio extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, options = [""]) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -193,6 +223,11 @@ export class FieldRadio extends Field {
         this.element = fieldEl;
     }
 }
+
+
+/**
+ * Administra el componente field select
+ */
 export class FieldSelect extends Field {
     constructor(nombre, placeholder, isRequired, isDisabled, isVisible, options = [""]) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);

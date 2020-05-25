@@ -1,4 +1,6 @@
-
+/**
+ * Configuracion de encabezado de consola
+ */
 export const ASCIIArt = `
  %%  %% %%%%%% %%  %%        %%      %%%%  %%%%%  %%%%%% 
  %%  %%   %%   %%% %%        %%     %%  %% %%  %%    %%  
