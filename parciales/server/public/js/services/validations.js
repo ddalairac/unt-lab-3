@@ -33,8 +33,6 @@ export class Validate {
         let valid = true;
         Validate.cleanErrors();
 
-        valid = Validate.vRquired(formdata);
-
         if (Validate.vEmail(formdata.email)) {
             Validate.addError("email", "El mail no es valido")
             valid = false
@@ -42,7 +40,7 @@ export class Validate {
 
         let date = new Date(formdata.date)
         if (date > Date.now()) {
-            Validate.addError("date", "La fecha debe ser anterior a la fechad e hoy")
+            Validate.addError("date", "La fecha debe ser anterior a la fecha de hoy")
             valid = false
         }
 
@@ -72,8 +70,7 @@ export class Validate {
         }
 
 
-
-
+        valid = Validate.vRquired(formdata,valid);
         let color = valid ? "green" : "red";
         console.log(`  isValid:%c${valid}`, `color: ${color};`);
 
@@ -86,12 +83,11 @@ export class Validate {
     }
 
     /** Helper: grega validacion de requerido en los campos */
-    static vRquired(formdata) {
-        let valid = true;
+    static vRquired(formdata,valid) {
         for (let fm of fieldsModel) {
             for (let id in formdata) {
                 if (fm.nombre == id) {
-                    if (fm.isRequired && !formdata[id]) {
+                    if (fm.isRequired && !formdata[id] && id !="id") {
                         Validate.addError(id, "Este Campo es oblicatorio");
                         valid = false
                     }

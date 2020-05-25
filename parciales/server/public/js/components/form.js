@@ -102,22 +102,24 @@ export class Form {
     readFormValues() {
         let request = {}
         for (let fm of fieldsModel) {
-            let value;
+            let value = "";
             let keyValue;
             try {
                 switch (fm.type) {
-                    case "select":
                     case "radio":
                         fm.options.forEach(opt => {
                             let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                            let radioElement = document.getElementById(id);
-                            if (radioElement.checked) {
-                                value = radioElement.value;
+                            let element = document.getElementById(id);
+                            if (element.checked) {
+                                value = element.value;
                             }
                         });
-                        if(value == undefined) value ="";
                         break;
 
+                    case "select":
+                        value = document.getElementById(fm.nombre).value
+                        break;
+                        
                     case "checkbox":
                         value = document.getElementById(fm.nombre).checked;
                         break;
@@ -148,8 +150,8 @@ export class Form {
                         case "radio":
                             fm.options.forEach(opt => {
                                 let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                                let radioElement = document.getElementById(id);
-                                radioElement.checked = false;
+                                let element = document.getElementById(id);
+                                element.checked = false;
                             });
                             break;
 
@@ -216,7 +218,6 @@ export class Form {
         document.getElementById("btnNew").onclick = this.onNew;
     }
     onNew() {
-        event.preventDefault();
         MemoryManager.instance.formInstance.newDataInForm();
     }
     onSubmit() {
