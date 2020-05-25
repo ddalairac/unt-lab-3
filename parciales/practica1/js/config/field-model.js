@@ -1,3 +1,6 @@
+/**
+ * Configuracion del modelo de datos para form y tabla
+ */
 export const fieldsModel = [
     { type: "number", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: true, isVisible: false, min: 1 },
     { type: "text", nombre: "text", placeholder: "Ingrese texto", isRequired: true, isDisabled: false, isVisible: true, maxlength: 10 },

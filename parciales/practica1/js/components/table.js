@@ -1,6 +1,9 @@
 import { MemoryManager } from "../services/memory-manager.js";
 import { fieldsModel } from "../config/field-model.js";
 
+/**
+ * Administra el componente tabla
+ */
 export class Table {
     static render(tableData) {
         let tableEl = document.createElement('table');

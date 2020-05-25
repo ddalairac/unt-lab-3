@@ -1,6 +1,13 @@
+
+/**
+ * Administra los request de la aplicacion con XMLHttpRequest
+ */
 export class restXHR {
     static url = "http://localhost:3000/";
 
+    /**
+     * Ejecuta el Request con el metodo Get y con el resource indicado, con la Web Api XMLHttpRequest
+     */
     static async get(resource) {
         loading.addL();
         return new Promise((resolve, reject) => {
@@ -18,6 +25,7 @@ export class restXHR {
                         console.log(xhr.status + " " + xhr.statusText)
                         // reject(JSON.parse(xhr.responseText))
                         resolve(null);
+                        // ? MAnejo el error dentro del metodo por eso no retorno el reject()
                         alert("No se pudieron obtener los datos");
                     }
                 }
@@ -27,6 +35,9 @@ export class restXHR {
         })
     }
 
+    /**
+     * Ejecuta el Request con el metodo Post, el resource, parametros y header indicado, con la Web Api XMLHttpRequest
+     */
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
@@ -54,6 +65,7 @@ export class restXHR {
                         console.log(xhr.status + " " + xhr.statusText)
                         // reject(JSON.parse(xhr.responseText))
                         resolve(null);
+                        // ? MAnejo el error dentro del metodo por eso no retorno el reject()
                         alert("No se pudo completar la operacion");
                     }
                 }
@@ -68,7 +80,13 @@ export class restXHR {
     }
 
 }
+/**
+ * Administra add/remove loading
+ */
 export class loading {
+    /**
+     * Agrega al DOM el elemento loading
+     */
     static addL() {
         let loadingEl = document.createElement('div');
         loadingEl.classList.add("loading");
@@ -77,17 +95,24 @@ export class loading {
         bodyEl.appendChild(loadingEl)
     }
 
+    /**
+     * Agrega del DOM el elemento loading
+     */
     static removeL() {
         let bodyEl = document.querySelector("body");
         bodyEl.removeChild(document.querySelector(".loading"))
     }
 }
 
+/**
+ * Administra los request de la aplicacion con fetch
+ */
 export class restFetch {
     static url = "http://localhost:3000/";
 
-
-
+    /**
+     * Ejecuta el Request con el metodo Get, con el resource indicado y la Web Api fetch
+     */
     static async get(resource) {
         console.log("%crestFetch.get", "color:blue");
         loading.addL();
@@ -106,11 +131,15 @@ export class restFetch {
                     loading.removeL();
                     // reject(err);
                     resolve(null);
+                    // ? MAnejo el error dentro del metodo por eso no retorno el reject()
                     alert("No se pudieron obtener los datos");
                 })
         })
     }
 
+    /**
+     * Ejecuta el Request con el metodo Post, el resource, parametros y header indicado, con la Web Api fetch
+     */
     static async post(resource, params, header) {
         loading.addL();
         return new Promise((resolve, reject) => {
@@ -143,6 +172,7 @@ export class restFetch {
                     // console.error("Error post: " + resource, err);
                     loading.removeL();
                     // reject(err);
+                    // ? MAnejo el error dentro del metodo por eso no retorno el reject() 
                     resolve(null);
                     alert("No se pudo completar la operacion");
                 })
@@ -152,6 +182,7 @@ export class restFetch {
 }
 
 
+// ? Pruebas
 
 // let alta = {
 //     id: "2",

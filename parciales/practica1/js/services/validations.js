@@ -1,5 +1,11 @@
-
+/**
+ * Administra las validaciones de la aplicacion
+ */
 export class Validate {
+    
+    /**
+     * Limpia los errores renderizados en el form
+     */
     static cleanErrors() {
         let fields = document.querySelectorAll(".field");
         for (let field of fields) {
@@ -7,11 +13,19 @@ export class Validate {
         }
     }
     static mailformat = `/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/`;
+
+    
+    /**
+     * renderiza un error
+     */
     static addError(fieldName, msj) {
         document.getElementById(`field_${fieldName}`).classList.add("error");
         document.getElementById(`error_${fieldName}`).innerText = msj;
     }
 
+    /**
+     * Validaciones custom del form
+     */
     static form(formdata) {
         console.log(" ");
         console.log("%cValidate Form", "color: green;",formdata);

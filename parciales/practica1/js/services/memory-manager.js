@@ -5,6 +5,9 @@ import { Validate } from './validations.js';
 import { fieldsModel } from "../config/field-model.js";
 import { ASCIIArt } from '../config/ascii-art.js';
 
+/**
+ * Administra la memoria de la aplicacion
+ */
 export class MemoryManager {
     constructor() {
         if (MemoryManager._instance) {
@@ -27,6 +30,10 @@ export class MemoryManager {
     data;
     selectID
 
+    
+    /**
+     * Valida que la informacion recibida sea este correctamente tipada
+     */
     validateTypes() {
         console.log(" ")
         console.log("%cValidate types", "color: green;")
@@ -42,9 +49,13 @@ export class MemoryManager {
             }
         }
     }
+
+    /**
+     * Ejecuta la llamada para obtener la info 
+     */
     readAndRender() {
         restXHR.get("traer").then(
-            // restFetch.get("traer").then(
+        // restFetch.get("traer").then(
             (response) => {
                 if (!this.containerElement)
                     this.containerElement = document.getElementById("container");
@@ -57,6 +68,10 @@ export class MemoryManager {
             }
         )
     }
+
+    /**
+     * Ejecuta las llamadas para agregar o editar un item 
+     */
     saveEditData() {
         let dto = this.formInstance.readFormValues();
         if (Validate.form(dto)) {
@@ -74,7 +89,7 @@ export class MemoryManager {
             } else {
                 console.log("%cDTO New: ", "color:blue", dto)
                 restXHR.post("alta", dto).then(
-                    // restFetch.post("alta", dto).then(
+                // restFetch.post("alta", dto).then(
                     () => {
                         this.formInstance.formClose();
                         this.readAndRender()
@@ -83,14 +98,18 @@ export class MemoryManager {
             }
         }
     }
+
+    /**
+     * Ejecuta la llamada para borrar un item 
+     */
     removeData() {
         let id = this.formInstance.readFormValues().id;
         let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params)
         let header = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
         restXHR.post("baja", params, header).then(
-            // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
-            // restFetch.post("baja", params, headerFetch).then(
+        // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
+        // restFetch.post("baja", params, headerFetch).then(
             () => {
                 this.formInstance.formClose();
                 this.readAndRender()
