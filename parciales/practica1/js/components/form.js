@@ -72,14 +72,15 @@ export class Form {
                 switch (fm.type) {
                     case "radio":
                         fm.options.forEach(opt => {
-                            let id = opt.toLowerCase().split(' ').join('_');
+                            let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
                             let element = document.getElementById(id);
                             element.checked = (formData[fm.nombre] == element.value)
                         });
                         break;
                     case "select":
                         fm.options.forEach(opt => {
-                            let element = document.getElementById(opt);
+                            let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
+                            let element = document.getElementById(id);
                             element.selected = (formData[fm.nombre] == element.value)
                         });
                         break;
@@ -107,7 +108,7 @@ export class Form {
                 switch (fm.type) {
                     case "radio":
                         fm.options.forEach(opt => {
-                            let id = opt.toLowerCase().split(' ').join('_');
+                            let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
                             let radioElement = document.getElementById(id);
                             if (radioElement.checked) {
                                 value = radioElement.value;
@@ -144,7 +145,7 @@ export class Form {
                     switch (fm.type) {
                         case "radio":
                             fm.options.forEach(opt => {
-                                let id = opt.toLowerCase().split(' ').join('_');
+                                let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
                                 let radioElement = document.getElementById(id);
                                 radioElement.checked = false;
                             });

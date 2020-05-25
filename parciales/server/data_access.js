@@ -92,7 +92,13 @@
                 }
                 array = JSON.parse(data);
                 //obtengo index del id que necesito
-                var index = array.findIndex(function (obj) { return obj.id === nuevoObjeto.id || obj.id.toString() === nuevoObjeto.id; })
+                var index = array.findIndex(function (obj) { 
+                    console.log(nuevoObjeto.id, obj.id);
+                    console.log(typeof nuevoObjeto.id, typeof obj.id);
+                    console.log(obj.id === nuevoObjeto.id || obj.id.toString() === nuevoObjeto.id);
+                    console.log(" ");
+                    return obj.id === nuevoObjeto.id || obj.id.toString() === nuevoObjeto.id; 
+                })
                 array[index] = nuevoObjeto;
 
                 require('fs').writeFileSync(__dirname + '\\data\\data.json', JSON.stringify(array));

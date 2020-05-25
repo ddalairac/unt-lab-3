@@ -17,7 +17,7 @@ export class Table {
         for (let fm of fieldsModel) {
             key = fm.nombre;
             let thEl = document.createElement('th');
-            let title = key.toLowerCase().split('_').join(' ');
+            let title = key.toLowerCase().split(' ').join('_').split('-').join('');
             thEl.innerHTML = title
             trEl.appendChild(thEl)
         }
@@ -30,8 +30,9 @@ export class Table {
             let trEl = document.createElement('tr');
             for (let key in trData) {
                 let tdEl = document.createElement('td');
-                tdEl.innerText = trData[key];
-                tdEl.setAttribute('data-before', key.toLowerCase().split('_').join(' '));
+                let value = Table.tdValue(key, trData[key])
+                tdEl.innerHTML = value;//trData[key];
+                tdEl.setAttribute('data-before', key.toLowerCase().split(' ').join('_').split('-').join(''));
                 trEl.appendChild(tdEl);
             }
             trEl.onclick = Table.rowClick
@@ -42,13 +43,44 @@ export class Table {
         return tableEl;
     }
 
+    /* 
+    * Evalua como se debe renderizar el valor del item en la tabla
+     */
+    static tdValue(key, value) {
+        let renderValue = value;
+        for (let fm of fieldsModel) {
+            try {
+                if (key == fm.nombre) {
+                    switch (fm.type) {
+                        case "select":
+                        case "radio":
+                            fm.options.forEach(opt => {
+                                if (value == opt.value) renderValue = opt.label
+                            });
+                            break;
+
+                        case "checkbox":
+                            renderValue = JSON.parse(value)
+                                ? `<i class="fas fa-check"></i>`
+                                : `<i class="fas fa-times"></i>`;
+                            break;
+                    }
+                }
+            } catch (error) {
+                console.error("error tdValue() en key: " + key);
+                console.error(error);
+            }
+        }
+        return renderValue;
+    }
+
     /** 
      * Evento Click en row de la tabla
     */
     static rowClick() {
         /* 
         * Inicialmente hice un toogle del row, pero no me parecio una buena experiencia modificar el item a mitad de la edicion,
-        * y lo cambie a que solo seleccione el item. 
+        * y lo cambie a que solo seleccione el item, y se cierre el form solo desde el form. 
         */
         if (MemoryManager.instance.formInstance.formElement.classList.contains("close")) {
             let rows = document.querySelectorAll("tbody tr");
@@ -59,11 +91,11 @@ export class Table {
                     //     row.classList.remove("active");
                     //     MemoryManager.instance.formInstance.cancelEditDataInForm();
                     // } else {
-                        MemoryManager.instance.formInstance.editDataInForm(index, row.offsetTop);
-                        row.classList.add("active");
+                    MemoryManager.instance.formInstance.editDataInForm(index, row.offsetTop);
+                    row.classList.add("active");
                     // }
-                // } else {
-                //     row.classList.remove("active");
+                    // } else {
+                    //     row.classList.remove("active");
                 }
                 index++;
             }

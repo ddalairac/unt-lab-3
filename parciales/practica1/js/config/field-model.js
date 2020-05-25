@@ -2,15 +2,25 @@
  * Configuracion del modelo de datos para form y tabla
  */
 export const fieldsModel = [
-    { type: "number", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: true, isVisible: false, min: 1 },
+    { type: "text", nombre: "id", placeholder: "Ingrese id", isRequired: true, isDisabled: true, isVisible: false, min: 1 },
     { type: "text", nombre: "text", placeholder: "Ingrese texto", isRequired: true, isDisabled: false, isVisible: true, maxlength: 10 },
     { type: "email", nombre: "email", placeholder: "Ingrese email", isRequired: true, isDisabled: false, isVisible: true, maxlength: 40 },
     { type: "number", nombre: "number", placeholder: "Ingrese numero", isRequired: true, isDisabled: false, isVisible: true, min: 1, max: 5 },
     { type: "date", nombre: "date", placeholder: "Ingrese fecha", isRequired: true, isDisabled: false, isVisible: true, min: "2000-01-02", max: "2020-12-31" },
     { type: "checkbox", nombre: "checkbox", placeholder: "Ingrese checkbox", isRequired: true, isDisabled: false, isVisible: true },
     { type: "textarea", nombre: "textarea", placeholder: "Ingrese textarea", isRequired: true, isDisabled: false, isVisible: true, rows: 4 },
-    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, isVisible: true, options: ["El Hombre", "Mujer", "Otro"] },
-    { type: "select", nombre: "select", placeholder: "selecione una opcion", isRequired: true, isDisabled: false, isVisible: true, options: ["Argentina", "Chile", "Brasil"] },
+    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, isVisible: true, options: [
+            { value: "Hombre", label: "Un Hombre" },
+            { value: "Mujer", label: "Una Mujer" },
+            { value: "Otro", label: "Otro" }
+        ]
+    },
+    { type: "select", nombre: "select", placeholder: "selecione una opcion", isRequired: true, isDisabled: false, isVisible: true, options: [
+            { value: "AR", label: "Argentina" },
+            { value: "CH", label: "Chile" },
+            { value: "BR", label: "Brasil" }
+        ]
+    },
 
 
     // { type: "number", nombre: "id", placeholder: "", isRequired: false, isDisabled: true, isVisible: true },

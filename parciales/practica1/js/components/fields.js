@@ -208,16 +208,16 @@ export class FieldRadio extends Field {
         let required = this.isRequired ? `required` : '';
         let optionsElements = "";
         this.options.forEach(option => {
-            let key = option.toLowerCase().split(' ').join('_');
+            let key = option.value.toLowerCase().split(' ').join('_').split('-').join('');
             optionsElements += `
-            <input type="radio" id="${key}" name="${this.nombre}" value="${option}" ${disabled} ${required}>
-            <label for="${key}">${option.toLowerCase().split('_').join(' ')}</label>`
+            <input type="radio" id="${key}" name="${this.nombre}" value="${option.value}" ${disabled} ${required}>
+            <label for="${key}">${option.label}</label>`
         });
         fieldEl.innerHTML = `
                 <p>${this.label}</p>
                 ${optionsElements}
                 <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
-        let inputEl = fieldEl.childNodes[3];
+        // let inputEl = fieldEl.childNodes[3];
         // inputEl.disabled = this.isDisabled;
         // inputEl.required = this.isRequired;
 
@@ -240,10 +240,12 @@ export class FieldSelect extends Field {
         let fieldEl = this.createFieldElement();
         let optionsElements = `<option value="" disabled selected hidden>${this.placeholder}</option>`;
         this.options.forEach(option => {
-            let label = option.toLowerCase().split('_').join(' ');
-            label = label.charAt(0).toUpperCase() + label.slice(1);
+            // let label = option.label;
+            // let label = option.toLowerCase().split('_').join(' ');
+            // label = label.charAt(0).toUpperCase() + label.slice(1);
+            let key = option.value.toLowerCase().split(' ').join('_').split('-').join('');
             optionsElements += `
-            <option id="${option}" value="${option}">${label}</option>`
+            <option id="${key}" value="${option.value}">${option.label}</option>`
         });
         fieldEl.innerHTML = `
                 <label for="${this.nombre}">${this.label}</label>
