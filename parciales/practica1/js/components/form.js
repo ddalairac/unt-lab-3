@@ -106,6 +106,7 @@ export class Form {
             let keyValue;
             try {
                 switch (fm.type) {
+                    case "select":
                     case "radio":
                         fm.options.forEach(opt => {
                             let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
@@ -114,6 +115,7 @@ export class Form {
                                 value = radioElement.value;
                             }
                         });
+                        if(value == undefined) value ="";
                         break;
 
                     case "checkbox":

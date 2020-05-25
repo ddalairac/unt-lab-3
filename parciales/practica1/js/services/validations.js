@@ -1,8 +1,11 @@
+import { fieldsModel } from "../config/field-model.js";
+
 /**
  * Administra las validaciones de la aplicacion
  */
 export class Validate {
-    
+    static mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
     /**
      * Limpia los errores renderizados en el form
      */
@@ -12,9 +15,7 @@ export class Validate {
             field.classList.remove("error");
         }
     }
-    static mailformat = `/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/`;
 
-    
     /**
      * renderiza un error
      */
@@ -28,56 +29,75 @@ export class Validate {
      */
     static form(formdata) {
         console.log(" ");
-        console.log("%cValidate Form", "color: green;",formdata);
+        console.log("%cValidate Form", "color: green;", formdata);
         let valid = true;
         Validate.cleanErrors();
 
-        // if (!formdata.checkbox || formdata.checkbox == false) {
-        //     Validate.addError("checkbox", "Debe aceptar el checkbox'")
-        //     valid = false
-        // }
+        valid = Validate.vRquired(formdata);
 
-        // let date = new Date(formdata.date)
-        // if (!formdata.date || date > Date.now()) {
-        //     Validate.addError("date", "La fecha debe ser anterior a la fechad e hoy")
-        //     valid = false
-        // }
+        if (Validate.vEmail(formdata.email)) {
+            Validate.addError("email", "El mail no es valido")
+            valid = false
+        }
 
-        // if (!formdata.email || formdata.email.match(Validate.mailformat)) {
-        //     Validate.addError("email", "El mail no es valido")
-        //     valid = false
-        // }
+        let date = new Date(formdata.date)
+        if (date > Date.now()) {
+            Validate.addError("date", "La fecha debe ser anterior a la fechad e hoy")
+            valid = false
+        }
 
-        // if (!formdata.number || formdata.number < 2) {
-        //     Validate.addError("number", "El numero debe ser mayor a 2")
-        //     valid = false
-        // }
+        if (formdata.checkbox == false) {
+            Validate.addError("checkbox", "Debe aceptar el checkbox'")
+            valid = false
+        }
 
-        // if (!formdata.radio || formdata.radio != "El Hombre") {
-        //     Validate.addError("radio", "Debe ser hombre")
-        //     valid = false
-        // }
+        if (formdata.number < 2) {
+            Validate.addError("number", "El numero debe ser mayor a 2")
+            valid = false
+        }
 
-        // if (!formdata.select || formdata.select != "Argentina") {
-        //     Validate.addError("select", "Debe ser Argentina")
-        //     valid = false
-        // }
+        if (formdata.radio != "Hombre") {
+            Validate.addError("radio", "Debe ser hombre")
+            valid = false
+        }
 
-        // if (!formdata.text || formdata.text != "valido") {
-        //     Validate.addError("text", "Agregar el texto 'valido'")
-        //     valid = false
-        // }
+        if (formdata.select != "AR") {
+            Validate.addError("select", "Debe ser Argentina")
+            valid = false
+        }
 
-        // if (!formdata.textarea) {
-        //     Validate.addError("textarea", "Textarea es obligatorio")
-        //     valid = false
-        // }
+        if (formdata.text != "valido") {
+            Validate.addError("text", "Agregar el texto 'valido'")
+            valid = false
+        }
 
-        
+
+
 
         let color = valid ? "green" : "red";
         console.log(`  isValid:%c${valid}`, `color: ${color};`);
 
+        return valid;
+    }
+
+    /** Helper: grega validacion email */
+    static vEmail(field) {
+        return !Validate.mailformat.test(field);
+    }
+
+    /** Helper: grega validacion de requerido en los campos */
+    static vRquired(formdata) {
+        let valid = true;
+        for (let fm of fieldsModel) {
+            for (let id in formdata) {
+                if (fm.nombre == id) {
+                    if (fm.isRequired && !formdata[id]) {
+                        Validate.addError(id, "Este Campo es oblicatorio");
+                        valid = false
+                    }
+                }
+            }
+        }
         return valid;
     }
 }
