@@ -35,7 +35,6 @@
                 }
                 array = JSON.parse(data);
                 array = array.filter(function (a) {
-                    console.log(a.active)
                     return a.active == true || a.active == "true";
                 });
                 array.forEach(element => {

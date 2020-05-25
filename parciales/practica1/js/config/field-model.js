@@ -9,7 +9,7 @@ export const fieldsModel = [
     { type: "date", nombre: "date", placeholder: "Ingrese fecha", isRequired: true, isDisabled: false, isVisible: true, min: "2000-01-02", max: "2020-12-31" },
     { type: "checkbox", nombre: "checkbox", placeholder: "Ingrese checkbox", isRequired: true, isDisabled: false, isVisible: true },
     { type: "textarea", nombre: "textarea", placeholder: "Ingrese textarea", isRequired: true, isDisabled: false, isVisible: true, rows: 4 },
-    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, isVisible: true, options: ["Hombre", "Mujer", "Otro"] },
+    { type: "radio", nombre: "radio", placeholder: "selecione un radio", isRequired: true, isDisabled: false, isVisible: true, options: ["El Hombre", "Mujer", "Otro"] },
     { type: "select", nombre: "select", placeholder: "selecione una opcion", isRequired: true, isDisabled: false, isVisible: true, options: ["Argentina", "Chile", "Brasil"] },
 
 

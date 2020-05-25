@@ -80,7 +80,6 @@ export class MemoryManager {
                 // restXHR.post("modificar", dto).then(
                 restFetch.post("modificar", dto).then(
                     () => {
-                        console.log("this: ", this)
                         this.formInstance.formClose();
                         this.readAndRender()
                     }

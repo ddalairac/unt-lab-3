@@ -32,46 +32,46 @@ export class Validate {
         let valid = true;
         Validate.cleanErrors();
 
-        if (!formdata.checkbox || formdata.checkbox == false) {
-            Validate.addError("checkbox", "Debe aceptar el checkbox'")
-            valid = false
-        }
+        // if (!formdata.checkbox || formdata.checkbox == false) {
+        //     Validate.addError("checkbox", "Debe aceptar el checkbox'")
+        //     valid = false
+        // }
 
-        let date = new Date(formdata.date)
-        if (!formdata.date || date > Date.now()) {
-            Validate.addError("date", "La fecha debe ser anterior a la fechad e hoy")
-            valid = false
-        }
+        // let date = new Date(formdata.date)
+        // if (!formdata.date || date > Date.now()) {
+        //     Validate.addError("date", "La fecha debe ser anterior a la fechad e hoy")
+        //     valid = false
+        // }
 
-        if (!formdata.email || formdata.email.match(Validate.mailformat)) {
-            Validate.addError("email", "El mail no es valido")
-            valid = false
-        }
+        // if (!formdata.email || formdata.email.match(Validate.mailformat)) {
+        //     Validate.addError("email", "El mail no es valido")
+        //     valid = false
+        // }
 
-        if (!formdata.number || formdata.number < 2) {
-            Validate.addError("number", "El numero debe ser mayor a 2")
-            valid = false
-        }
+        // if (!formdata.number || formdata.number < 2) {
+        //     Validate.addError("number", "El numero debe ser mayor a 2")
+        //     valid = false
+        // }
 
-        if (!formdata.radio || formdata.radio != "Hombre") {
-            Validate.addError("radio", "Debe ser hombre")
-            valid = false
-        }
+        // if (!formdata.radio || formdata.radio != "El Hombre") {
+        //     Validate.addError("radio", "Debe ser hombre")
+        //     valid = false
+        // }
 
-        if (!formdata.select || formdata.select != "Argentina") {
-            Validate.addError("select", "Debe ser Argentina")
-            valid = false
-        }
+        // if (!formdata.select || formdata.select != "Argentina") {
+        //     Validate.addError("select", "Debe ser Argentina")
+        //     valid = false
+        // }
 
-        if (!formdata.text || formdata.text != "valido") {
-            Validate.addError("text", "Agregar el texto 'valido'")
-            valid = false
-        }
+        // if (!formdata.text || formdata.text != "valido") {
+        //     Validate.addError("text", "Agregar el texto 'valido'")
+        //     valid = false
+        // }
 
-        if (!formdata.textarea) {
-            Validate.addError("textarea", "Textarea es obligatorio")
-            valid = false
-        }
+        // if (!formdata.textarea) {
+        //     Validate.addError("textarea", "Textarea es obligatorio")
+        //     valid = false
+        // }
 
         
 

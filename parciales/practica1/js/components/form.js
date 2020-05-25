@@ -72,7 +72,8 @@ export class Form {
                 switch (fm.type) {
                     case "radio":
                         fm.options.forEach(opt => {
-                            let element = document.getElementById(opt);
+                            let id = opt.toLowerCase().split(' ').join('_');
+                            let element = document.getElementById(id);
                             element.checked = (formData[fm.nombre] == element.value)
                         });
                         break;
@@ -106,7 +107,8 @@ export class Form {
                 switch (fm.type) {
                     case "radio":
                         fm.options.forEach(opt => {
-                            let radioElement = document.getElementById(opt);
+                            let id = opt.toLowerCase().split(' ').join('_');
+                            let radioElement = document.getElementById(id);
                             if (radioElement.checked) {
                                 value = radioElement.value;
                             }
@@ -142,7 +144,8 @@ export class Form {
                     switch (fm.type) {
                         case "radio":
                             fm.options.forEach(opt => {
-                                let radioElement = document.getElementById(opt);
+                                let id = opt.toLowerCase().split(' ').join('_');
+                                let radioElement = document.getElementById(id);
                                 radioElement.checked = false;
                             });
                             break;

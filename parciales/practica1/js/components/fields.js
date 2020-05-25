@@ -208,9 +208,10 @@ export class FieldRadio extends Field {
         let required = this.isRequired ? `required` : '';
         let optionsElements = "";
         this.options.forEach(option => {
+            let key = option.toLowerCase().split(' ').join('_');
             optionsElements += `
-            <input type="radio" id="${option}" name="${this.nombre}" value="${option}" ${disabled} ${required}>
-            <label for="${option}">${option.toLowerCase().split('_').join(' ')}</label>`
+            <input type="radio" id="${key}" name="${this.nombre}" value="${option}" ${disabled} ${required}>
+            <label for="${key}">${option.toLowerCase().split('_').join(' ')}</label>`
         });
         fieldEl.innerHTML = `
                 <p>${this.label}</p>
