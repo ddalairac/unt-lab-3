@@ -1,0 +1,13 @@
+.filters{
+    margin-bottom: 10px;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+}
+#f_columns{
+    display: flex; 
+    flex-wrap: wrap;
+    label{
+        color: white;
+    }
+}

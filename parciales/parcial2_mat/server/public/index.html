@@ -41,9 +41,29 @@
         <div class="bg"></div>
     </header>
 
+    <div class="filters">
+
+        <div id="filter_txtInRow" class="field">
+            <label id="label_f_txtInRow" for="f_txtInRow">buscar</label>
+            <input id="f_txtInRow" type="text" name="f_txtInRow" placeholder="Ingrese el texto a buscar">
+        </div>
+        <!-- <div id="filter_vacunas" class="field">
+            <label id="label_f_vacunas" for="f_vacunas"><i class="fas fa-syringe"></i> f_Vacunas</label>
+            <select id="f_vacunas" name="f_vacunas" required="">
+                <option value="" disabled="" selected="" hidden="">----Elegir----</option>
+                <option id="si" value="si">Si</option>
+                <option id="no" value="no">No</option>
+            </select>
+        </div> -->
+
+
+        <button id="btnSearch" class="primary outline">Buscar</button>
+    </div>
     <h3>Lista de mascotas
         <button id="btnNew" class="secondary"><i class="fas fa-plus"></i> Nuevo item </button>
     </h3>
+
+    <div id="f_columns"></div>
     <div id="container">
         <form class="form close" action="#" method="post">
             <button id="btnCancelX" class="btnClose" title="Cancelar"><i class="fas fa-times"></i></button>

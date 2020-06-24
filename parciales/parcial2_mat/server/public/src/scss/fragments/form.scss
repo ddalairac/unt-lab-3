@@ -47,67 +47,6 @@
         width: 100%;
         display: flex;
     }
-    .field {
-        display: flex;
-        margin-bottom: 15px;
-
-        &.w-100 {
-            width: 100% !important;
-        }
-
-        p,
-        label {
-            font-weight: 300;
-            text-transform: capitalize;
-            margin-bottom: 3px;
-        }
-        textarea {
-            width: 100%;
-            max-width: 100%;
-            min-width: 100%;
-        }
-        textarea,
-        select,
-        input {
-            border-radius: 3px;
-            border: 1px solid $colorBorder;
-            padding: 3px 8px;
-            font-size: 14px;
-            font-weight: 300;
-            min-height: 28px;
-        }
-        &.radio,
-        &.checkbox {
-            flex-direction: row;
-            align-content: flex-end;
-            input {
-                min-height: unset;
-                margin-left: 0;
-            }
-            label {
-                margin-right: 8px;
-            }
-            p {
-                margin: 0 0 9px;
-                width: 100%;
-            }
-        }
-        .error-msj {
-            color: $colorMagenta;
-            font-size: 14px;
-            margin-top: 6px;
-            display: none;
-            width: 100%;
-        }
-        &.error {
-            input {
-                border-color: $colorMagenta;
-            }
-            .error-msj {
-                display: block;
-            }
-        }
-    }
     .actions {
         width: 100%;
         margin-top: 15px;
@@ -120,6 +59,7 @@
     }
 }
 
+
 // responsive relative
 .fieldContainer,
 .form {
@@ -128,8 +68,6 @@
     justify-content: space-between;
     .field {
         width: 49%;
-        flex-wrap: wrap;
-        flex-direction: column;
     }
 }
 

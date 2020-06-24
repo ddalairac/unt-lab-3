@@ -1,6 +1,6 @@
 export class Anuncio {
     constructor(id, titulo, transaccion = "ventas", descripcion, precio) {
-        this.id = id;
+        this.id = (typeof id == "string") ? parseInt(id) : id;
         this.titulo = titulo;
         this.transaccion = transaccion;
         this.descripcion = descripcion;

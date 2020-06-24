@@ -2,7 +2,7 @@ import { eType } from '../config/interfaces.js';
 export class Field {
     constructor(nombre, placeholder = "", isRequired = false, isDisabled = false, isVisible = true) {
         if (!nombre) {
-            throw "El nombre del field no definido";
+            throw "El field debe tener nombre";
         }
         this.nombre = nombre;
         this.label = nombre.toLowerCase().split('_').join(' ');
@@ -84,7 +84,7 @@ export class FieldCheckbox extends Field {
         <p>${this.label}</p>
         <input id="${this.nombre}" type="checkbox" name="${this.nombre}">
         <label id="label_${this.nombre}" for="${this.nombre}">${this.placeholder}</label>
-        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
+        <span id="error_${this.nombre}" class="error-msj"></span>`;
         let inputEl = fieldEl.childNodes[3];
         inputEl.disabled = this.isDisabled;
         inputEl.required = this.isRequired;

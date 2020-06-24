@@ -1,5 +1,4 @@
 @import "./fragments/variables.scss";
-@import "./fragments/header.scss";
 html,
 body {
     margin: 0;
@@ -53,9 +52,12 @@ body {
         width: 164px;
     }
 }
+@import "./fragments/header.scss";
 @import "./fragments/text.scss";
-@import "./fragments/table.scss";
+@import "./fragments/filters.scss";
 @import "./fragments/form.scss";
+@import "./fragments/fields.scss";
+@import "./fragments/table.scss";
 @import "./fragments/buttons.scss";
 
 .hidden {

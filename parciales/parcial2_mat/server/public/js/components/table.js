@@ -6,12 +6,14 @@ export class Table {
         let theadEl = document.createElement('thead');
         let trEl = document.createElement('tr');
         let key;
-        for (let fm of fieldsModel) {
-            key = fm.nombre;
-            let thEl = document.createElement('th');
-            let title = key.toLowerCase().split(' ').join('_').split('-').join('');
-            thEl.innerHTML = title;
-            trEl.appendChild(thEl);
+        for (let col of MemoryManager.instance.filtersInstance.cols) {
+            if (col.isVisible) {
+                key = col.placeholder;
+                let thEl = document.createElement('th');
+                let title = key;
+                thEl.innerHTML = title;
+                trEl.appendChild(thEl);
+            }
         }
         theadEl.appendChild(trEl);
         tableEl.appendChild(theadEl);

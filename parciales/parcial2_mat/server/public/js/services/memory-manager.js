@@ -5,6 +5,7 @@ import { Validate } from './validations.js';
 import { fieldsModel } from "../config/field-model.js";
 import { ASCIIArt } from '../config/ascii-art.js';
 import { Anuncio_Mascota } from '../config/datos-modelo.js';
+import { Filters } from '../components/filters.js';
 export class MemoryManager {
     constructor() {
         this.data = [];
@@ -14,6 +15,7 @@ export class MemoryManager {
         MemoryManager._instance = this;
         console.log(ASCIIArt);
         this.formInstance = new Form();
+        this.filtersInstance = new Filters();
     }
     static get instance() {
         if (!this._instance)
@@ -47,18 +49,25 @@ export class MemoryManager {
     }
     readAndRender() {
         restXHR.get("traer").then((response) => {
-            if (!this.containerElement)
-                this.containerElement = document.getElementById("container");
-            if (this.tableElement)
-                this.containerElement.removeChild(this.tableElement);
-            let noDataEl = document.querySelector(".sindatos");
-            if (noDataEl)
-                this.containerElement.removeChild(noDataEl);
             this.validateTypes(response.data);
             this.data = this.crearObjetoAnuncio(response.data);
-            this.tableElement = Table.render(this.data);
-            this.containerElement.appendChild(this.tableElement);
+            this.filterAndRender();
         });
+    }
+    filterAndRender() {
+        let filterData = this.filtersInstance.applyFilters(this.data);
+        this.render(filterData);
+    }
+    render(data) {
+        if (!this.containerElement)
+            this.containerElement = document.getElementById("container");
+        if (this.tableElement)
+            this.containerElement.removeChild(this.tableElement);
+        let noDataEl = document.querySelector(".sindatos");
+        if (noDataEl)
+            this.containerElement.removeChild(noDataEl);
+        this.tableElement = Table.render(data);
+        this.containerElement.appendChild(this.tableElement);
     }
     saveEditData() {
         let dto = this.formInstance.readFormValues();

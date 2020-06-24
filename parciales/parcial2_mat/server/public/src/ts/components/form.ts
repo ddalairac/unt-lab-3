@@ -122,7 +122,7 @@ export class Form {
         }
         // }
     }
-    readFormValues(): Anuncio_Mascota & any {
+    readFormValues(): Anuncio_Mascota | any {
         let request = {}
         for (let fm of fieldsModel) {
             let value: any = "";
@@ -197,30 +197,30 @@ export class Form {
 
     // #region Fields
     renderFields() {
-        fieldsModel.forEach(field => {
+        fieldsModel.forEach(fm => {
             let fInst;
-            switch (field.type) {
+            switch (fm.type) {
                 case "number":
-                    fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min as number, field.max as number);
+                    fInst = new FieldNumber(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.min as number, fm.max as number);
                     break;
                 case "date":
-                    fInst = new FieldDate(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min as string, field.max as string);
+                    fInst = new FieldDate(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.min as string, fm.max as string);
                     break;
                 case "checkbox":
-                    fInst = new FieldCheckbox(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible);
+                    fInst = new FieldCheckbox(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible);
                     break;
                 case "textarea":
-                    fInst = new FieldTextarea(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.rows);
+                    fInst = new FieldTextarea(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.rows);
                     break;
                 case "radio":
-                    fInst = new FieldRadio(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.options);
+                    fInst = new FieldRadio(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.options);
                     break;
                 case "select":
-                    fInst = new FieldSelect(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.options);
+                    fInst = new FieldSelect(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.options);
                     break;
 
                 default:
-                    fInst = new FieldTextEmail(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.type, field.maxlength);
+                    fInst = new FieldTextEmail(fm.nombre, fm.placeholder, fm.isRequired, fm.isDisabled, fm.isVisible, fm.type, fm.maxlength);
                     break;
             }
             this.fields.push(fInst);

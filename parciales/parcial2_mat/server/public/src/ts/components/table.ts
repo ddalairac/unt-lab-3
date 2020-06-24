@@ -1,5 +1,5 @@
 import { MemoryManager } from "../services/memory-manager.js";
-import { fieldsModel } from "../config/field-model.js";
+import { fieldsModel, filterModel } from "../config/field-model.js";
 
 /**
  * Administra el componente tabla
@@ -14,12 +14,14 @@ export class Table {
         let theadEl = document.createElement('thead');
         let trEl = document.createElement('tr');
         let key;
-        for (let fm of fieldsModel) {
-            key = fm.nombre;
-            let thEl = document.createElement('th');
-            let title = key.toLowerCase().split(' ').join('_').split('-').join('');
-            thEl.innerHTML = title
-            trEl.appendChild(thEl)
+        for (let col of MemoryManager.instance.filtersInstance.cols) {
+            if (col.isVisible) {
+                key = col.placeholder
+                let thEl = document.createElement('th');
+                let title = key;    
+                thEl.innerHTML = title
+                trEl.appendChild(thEl)
+            }
         }
         theadEl.appendChild(trEl)
         tableEl.appendChild(theadEl)
@@ -83,7 +85,7 @@ export class Table {
         * y lo cambie a que solo seleccione el item, y se cierre el form solo desde el form. 
         */
         if (MemoryManager.instance.formInstance.formElement.classList.contains("close")) {
-            let rows:HTMLElement[] = [...document.querySelectorAll("tbody tr")] as HTMLElement[];
+            let rows: HTMLElement[] = [...document.querySelectorAll("tbody tr")] as HTMLElement[];
             let index = 0
             // console.log("event",event)
             // console.log("event type",typeof event)

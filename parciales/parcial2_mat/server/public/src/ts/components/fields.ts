@@ -1,7 +1,6 @@
 import { eType, iOptions } from '../config/interfaces.js';
 
 /** Clase base para fields
- * nombre, type, placeholder, isRequired
     *  @param nombre: string.
     *  @param placeholder: string.
     *  @param isRequired: boolean.
@@ -11,7 +10,7 @@ import { eType, iOptions } from '../config/interfaces.js';
  export abstract class Field {
     constructor(nombre:string, placeholder:string = "", isRequired:boolean = false, isDisabled:boolean = false, isVisible:boolean = true){
         if (!nombre) {
-            throw "El nombre del field no definido";
+            throw "El field debe tener nombre";
         }
         this.nombre = nombre;
         this.label = nombre.toLowerCase().split('_').join(' ');
@@ -43,9 +42,7 @@ import { eType, iOptions } from '../config/interfaces.js';
     }
 }
 
-/**
- * Administra el componente field text/email
- */
+/** Crea el componente field text/email */
 export class FieldTextEmail extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, type:eType = eType.text, maxlength:number = 0) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -70,10 +67,7 @@ export class FieldTextEmail extends Field {
     }
 }
 
-
-/**
- * Administra el componente field numero
- */
+/** Crea el componente field numero */
 export class FieldNumber extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, min:number, max:number) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -108,10 +102,7 @@ export class FieldNumber extends Field {
     }
 }
 
-
-/**
- * Administra el componente field checkbox
- */
+/** Crea el componente field checkbox */
 export class FieldCheckbox extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -125,7 +116,7 @@ export class FieldCheckbox extends Field {
         <p>${this.label}</p>
         <input id="${this.nombre}" type="checkbox" name="${this.nombre}">
         <label id="label_${this.nombre}" for="${this.nombre}">${this.placeholder}</label>
-        <span id="error_${this.nombre}" class="error-msj">error del campo</span>`;
+        <span id="error_${this.nombre}" class="error-msj"></span>`;// error del campo
 
         let inputEl:HTMLInputElement = fieldEl.childNodes[3] as HTMLInputElement ;
         inputEl.disabled = this.isDisabled;
@@ -135,10 +126,7 @@ export class FieldCheckbox extends Field {
     }
 }
 
-
-/**
- * Administra el componente field textarea
- */
+/** Crea el componente field textarea */
 export class FieldTextarea extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, rows:number = 0) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -163,10 +151,7 @@ export class FieldTextarea extends Field {
     }
 }
 
-
-/**
- * Administra el componente field date
- */
+/** Crea el componente field date */
 export class FieldDate extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, min:string = '', max:string = '') {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -193,10 +178,7 @@ export class FieldDate extends Field {
     }
 }
 
-
-/**
- * Administra el componente field radio
- */
+/** Crea el componente field radio */
 export class FieldRadio extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, options:iOptions[] = []) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);
@@ -229,10 +211,7 @@ export class FieldRadio extends Field {
     }
 }
 
-
-/**
- * Administra el componente field select
- */
+/** Crea el componente field select */
 export class FieldSelect extends Field {
     constructor(nombre:string, placeholder:string, isRequired:boolean, isDisabled:boolean, isVisible:boolean, options:iOptions[] = []) {
         super(nombre, placeholder, isRequired, isDisabled, isVisible);

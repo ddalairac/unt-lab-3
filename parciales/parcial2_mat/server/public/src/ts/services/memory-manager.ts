@@ -6,6 +6,7 @@ import { fieldsModel } from "../config/field-model.js";
 import { ASCIIArt } from '../config/ascii-art.js';
 import { Anuncio_Mascota } from '../config/datos-modelo.js';
 import { iResponse } from '../config/interfaces.js';
+import { Filters } from '../components/filters.js';
 
 /**
  * Administra la memoria de la aplicacion
@@ -18,6 +19,7 @@ export class MemoryManager {
         MemoryManager._instance = this;
         console.log(ASCIIArt);
         this.formInstance = new Form();
+        this.filtersInstance = new Filters();
         // this.data = [];
     }
     static get instance() {
@@ -29,14 +31,14 @@ export class MemoryManager {
 
     tableElement: HTMLElement;
     containerElement: HTMLElement;
+    filtersInstance: Filters;
     formInstance: Form;
     data: Anuncio_Mascota[] = [];
+
     // selectID;
 
 
-    /**
-     * Valida que la informacion recibida sea este correctamente modelada
-     */
+    /** Valida que la informacion recibida sea este correctamente modelada */
     validateTypes(data: any[]): void {
         console.log(" ")
         console.log("%cValidate types", "color: green;")
@@ -73,27 +75,29 @@ export class MemoryManager {
         console.log("anuncios", lista)
         return lista;
     }
-    /**
-     * Ejecuta la llamada para obtener la info 
-     */
+    /** Ejecuta la llamada para obtener la info y renderiza*/
     readAndRender() {
         restXHR.get("traer").then(
             // restFetch.get("traer").then(
             (response) => {
-                if (!this.containerElement)
-                    this.containerElement = document.getElementById("container");
-                if (this.tableElement)
-                    this.containerElement.removeChild(this.tableElement);
-                let noDataEl = document.querySelector(".sindatos");
-                if (noDataEl)
-                    this.containerElement.removeChild(noDataEl);
-
                 this.validateTypes((response as any).data);
                 this.data = this.crearObjetoAnuncio((response as iResponse).data);
-                this.tableElement = Table.render(this.data);
-                this.containerElement.appendChild(this.tableElement);
+                this.filterAndRender()
             }
         )
+    }
+    filterAndRender(){
+        let filterData = this.filtersInstance.applyFilters(this.data);
+        this.render(filterData)
+    }
+    render(data:any[]) {
+        if (!this.containerElement) this.containerElement = document.getElementById("container");
+        if (this.tableElement) this.containerElement.removeChild(this.tableElement);
+        let noDataEl = document.querySelector(".sindatos");
+        if (noDataEl) this.containerElement.removeChild(noDataEl);
+
+        this.tableElement = Table.render(data);
+        this.containerElement.appendChild(this.tableElement);
     }
 
     /**
