@@ -1,11 +1,11 @@
-import { Table } from '../components/table';
-import { Form } from '../components/form';
-import { restXHR, restFetch } from './rest';
-import { Validate } from './validations';
-import { fieldsModel } from "../config/field-model";
-import { ASCIIArt } from '../config/ascii-art';
-import { Anuncio_Mascota } from '../config/datos-modelo';
-import { iFieldsModel } from '../config/interfaces';
+import { Table } from '../components/table.js';
+import { Form } from '../components/form.js';
+import { restXHR, restFetch, iFetchHeader, iXHRHeader } from './rest.js';
+import { Validate } from './validations.js';
+import { fieldsModel } from "../config/field-model.js";
+import { ASCIIArt } from '../config/ascii-art.js';
+import { Anuncio_Mascota } from '../config/datos-modelo.js';
+import { iResponse } from '../config/interfaces.js';
 
 /**
  * Administra la memoria de la aplicacion
@@ -37,7 +37,7 @@ export class MemoryManager {
     /**
      * Valida que la informacion recibida sea este correctamente modelada
      */
-    validateTypes(data:any[]):void {
+    validateTypes(data: any[]): void {
         console.log(" ")
         console.log("%cValidate types", "color: green;")
         if (data[0]) {
@@ -53,7 +53,7 @@ export class MemoryManager {
         }
     }
 
-    crearObjetoAnuncio(data: Anuncio_Mascota[] | any[]): Anuncio_Mascota[]  {
+    crearObjetoAnuncio(data: Anuncio_Mascota[] | any[]): Anuncio_Mascota[] {
         console.log("data", data)
         let lista: any[] = []
         data.forEach(item => {
@@ -88,8 +88,8 @@ export class MemoryManager {
                 if (noDataEl)
                     this.containerElement.removeChild(noDataEl);
 
-                this.data = this.validateTypes(response.data)
-                this.data = this.crearObjetoAnuncio(response.data);
+                this.validateTypes((response as any).data);
+                this.data = this.crearObjetoAnuncio((response as iResponse).data);
                 this.tableElement = Table.render(this.data);
                 this.containerElement.appendChild(this.tableElement);
             }
@@ -132,9 +132,9 @@ export class MemoryManager {
         let id = this.formInstance.readFormValues().id;
         let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params)
-        let header = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
+        let header: iXHRHeader[] = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
         restXHR.post("baja", params, header).then(
-            // let headerFetch = { "content-type": "application/x-www-form-urlencoded" }
+            // let headerFetch:iFetchHeader = { "content-type": "application/x-www-form-urlencoded" }
             // restFetch.post("baja", params, headerFetch).then(
             () => {
                 this.formInstance.formClose();

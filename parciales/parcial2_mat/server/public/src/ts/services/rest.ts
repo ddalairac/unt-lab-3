@@ -38,7 +38,7 @@ export class restXHR {
     /**
      * Ejecuta el Request con el metodo Post, el resource, parametros y header indicado, con la Web Api XMLHttpRequest
      */
-    static async post(resource, params, header) {
+    static async post(resource:string, params: object | string, header?:iXHRHeader[]) {
         loading.addL();
         return new Promise((resolve, reject) => {
             console.log("%crestXHR.post", "color:blue");
@@ -141,7 +141,7 @@ export class restFetch {
     /**
      * Ejecuta el Request con el metodo Post, el resource, parametros y header indicado, con la Web Api fetch
      */
-    static async post(resource, params, header) {
+    static async post(resource:string, params:object | string, header?:iFetchHeader) {
         loading.addL();
         return new Promise((resolve, reject) => {
             console.log("%crestFetch.post", "color:blue");
@@ -182,3 +182,10 @@ export class restFetch {
 
 }
 
+export interface iXHRHeader{
+    att: string;
+    value: string;
+}
+export interface iFetchHeader {
+    "content-type": string;
+}

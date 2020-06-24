@@ -1,6 +1,6 @@
-import { fieldsModel } from "../config/field-model";
-import { Anuncio_Mascota } from '../config/datos-modelo';
-import { FieldDate } from '../components/fields';
+import { fieldsModel } from "../config/field-model.js";
+import { Anuncio_Mascota } from '../config/datos-modelo.js';
+import { FieldDate } from '../components/fields.js';
 
 /**
  * Administra las validaciones de la aplicacion
@@ -41,7 +41,7 @@ export class Validate {
         // }
 
         let date:Date = new Date(formdata.fecha_de_nacimiento)
-        if (date > Date.now()) {
+        if (date.getTime() > Date.now()) {
             Validate.addError("fecha_de_nacimiento", "La fecha debe ser anterior a la fecha de hoy")
             valid = false
         }
@@ -80,8 +80,8 @@ export class Validate {
     }
 
     /** Helper: grega validacion email */
-    static vEmail(field:FieldDate) {
-        return !Validate.mailformat.test(field);
+    static vEmail(email:string) {
+        return !Validate.mailformat.test(email);
     }
 
     /** Helper: grega validacion de requerido en los campos */

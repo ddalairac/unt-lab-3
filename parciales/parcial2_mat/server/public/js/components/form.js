@@ -1,32 +1,19 @@
 import { MemoryManager } from "../services/memory-manager.js";
-import { FieldTextEmail, FieldNumber, FieldDate, FieldCheckbox, FieldTextarea, FieldRadio, FieldSelect, Field } from './fields.js';
+import { FieldTextEmail, FieldNumber, FieldDate, FieldCheckbox, FieldTextarea, FieldRadio, FieldSelect } from './fields.js';
 import { fieldsModel } from '../config/field-model.js';
 import { Validate } from "../services/validations.js";
-import { Anuncio_Mascota } from '../config/datos-modelo.js';
 import { eType } from '../config/interfaces.js';
-/**
- * Administra el componente Form
- */
 export class Form {
-
     constructor() {
-        this.fields = []
-        this.formElement = document.querySelector(".form") as HTMLElement & Anuncio_Mascota;
-        this.btnNewElement = document.getElementById("btnNew") as HTMLButtonElement;
-        this.titleElement = document.getElementById("formTitle") as HTMLElement;
-        this.fieldContElement = document.querySelector(".fieldContainer") as HTMLElement;
+        this.fields = [];
+        this.formElement = document.querySelector(".form");
+        this.btnNewElement = document.getElementById("btnNew");
+        this.titleElement = document.getElementById("formTitle");
+        this.fieldContElement = document.querySelector(".fieldContainer");
         this.renderFields();
         this.setButons();
         this.isEdit = false;
     }
-    formElement: HTMLElement & Anuncio_Mascota;
-    fieldContElement: HTMLElement;
-    fields: Field[];
-    btnNewElement: HTMLButtonElement;
-    titleElement: HTMLElement;
-    isEdit: Boolean;
-
-    // #region Form
     formOpen() {
         Validate.cleanErrors();
         this.formElement.classList.remove("close");
@@ -36,7 +23,6 @@ export class Form {
         this.formElement.classList.add("close");
         this.formElement.classList.remove("edit");
         this.btnNewElement.disabled = false;
-
     }
     newDataInForm() {
         this.cleanFormValues();
@@ -50,122 +36,109 @@ export class Form {
         this.isEdit = false;
     }
     addIconAndDefaults() {
-        // this.formElement.transaccion.value = "venta";
-        (document.querySelector(".form #transaccion") as HTMLInputElement).value = "venta";
-
-        let lVaElement: HTMLElement = document.getElementById("label_vacunas") as HTMLElement;
-        let lvaText: string = lVaElement.innerText;
+        document.querySelector(".form #transaccion").value = "venta";
+        let lVaElement = document.getElementById("label_vacunas");
+        let lvaText = lVaElement.innerText;
         lVaElement.innerHTML = `<i class="fas fa-syringe"></i> ${lvaText}`;
-
-        let lFeElement: HTMLElement = document.getElementById("label_fecha_de_nacimiento") as HTMLElement;
-        let lFeText: string = lFeElement.innerText;
+        let lFeElement = document.getElementById("label_fecha_de_nacimiento");
+        let lFeText = lFeElement.innerText;
         lFeElement.innerHTML = `<i class="fas fa-birthday-cake"></i> ${lFeText}`;
-
-        let lRaElement: HTMLElement = document.getElementById("label_raza") as HTMLElement;
-        let lRText: string = lRaElement.innerText;
+        let lRaElement = document.getElementById("label_raza");
+        let lRText = lRaElement.innerText;
         lRaElement.innerHTML = `<i class="fas fa-paw"></i> ${lRText}`;
     }
-    // editDataInForm(id, trElement) {
-    editDataInForm(index: number, topPosition: number) {
+    editDataInForm(index, topPosition) {
         this.cleanFormValues();
         let formData = MemoryManager.instance.data[index];
-        this.populateFormValues(formData)
-
+        this.populateFormValues(formData);
         this.formOpen();
         this.formElement.setAttribute("style", `top: ${topPosition - 25}px;`);
         this.formElement.classList.add("edit");
         this.titleElement.innerHTML = `<i class='fas fa-edit'></i> Editar anuncio ${formData.id}`;
         document.getElementById("btnSubmit").innerHTML = `<i class="fas fa-save"></i> Guardar cambios`;
         document.getElementById("btnRemove").classList.remove("hidden");
-        // this.addIconAndDefaults();
         this.isEdit = true;
     }
     cancelEditDataInForm() {
         this.formClose();
-        let rows: Element[] = [...document.querySelectorAll("tbody tr")];
+        let rows = [...document.querySelectorAll("tbody tr")];
         for (let row of rows) {
             row.classList.remove("active");
         }
     }
-    populateFormValues(formData: any) {
+    populateFormValues(formData) {
         for (let fm of fieldsModel) {
             try {
                 switch (fm.type) {
                     case eType.radio:
                         fm.options.forEach(opt => {
                             let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                            let element: HTMLInputElement = document.getElementById(id) as HTMLInputElement;
-                            element.checked = (formData[fm.nombre] == element.value)
+                            let element = document.getElementById(id);
+                            element.checked = (formData[fm.nombre] == element.value);
                         });
                         break;
                     case eType.select:
                         fm.options.forEach(opt => {
                             let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                            let element: HTMLOptionElement = document.getElementById(id) as HTMLOptionElement;
-                            element.selected = (formData[fm.nombre] == element.value) ? formData[fm.nombre] : undefined
-                         
+                            let element = document.getElementById(id);
+                            element.selected = (formData[fm.nombre] == element.value) ? formData[fm.nombre] : undefined;
                         });
                         break;
                     case eType.checkbox:
-                        let element: HTMLInputElement = document.getElementById(fm.nombre) as HTMLInputElement
+                        let element = document.getElementById(fm.nombre);
                         element.checked = JSON.parse(formData[fm.nombre]);
                         break;
-
                     default:
-                        (document.getElementById(fm.nombre) as HTMLInputElement).value = formData[fm.nombre];
+                        document.getElementById(fm.nombre).value = formData[fm.nombre];
                         break;
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 console.error("error populateFormValues() en id: " + fm.nombre);
                 console.error(error);
             }
         }
-        // }
     }
-    readFormValues(): Anuncio_Mascota & any {
-        let request = {}
+    readFormValues() {
+        let request = {};
         for (let fm of fieldsModel) {
-            let value: any = "";
+            let value = "";
             let keyValue;
             try {
                 switch (fm.type) {
                     case "radio":
                         fm.options.forEach(opt => {
                             let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                            let element: HTMLInputElement = document.getElementById(id) as HTMLInputElement;
+                            let element = document.getElementById(id);
                             if (element.checked) {
                                 value = element.value;
                             }
                         });
                         break;
-
                     case "select":
-                        value = (document.getElementById(fm.nombre) as HTMLSelectElement).value
+                        value = document.getElementById(fm.nombre).value;
                         break;
-
                     case "checkbox":
-                        value = (document.getElementById(fm.nombre) as HTMLInputElement).checked;
+                        value = document.getElementById(fm.nombre).checked;
                         break;
-
                     case "number":
-                        value = parseInt((document.getElementById(fm.nombre) as HTMLInputElement).value);
+                        value = parseInt(document.getElementById(fm.nombre).value);
                         break;
-
                     default:
-                        value = (document.getElementById(fm.nombre) as HTMLInputElement).value;
+                        value = document.getElementById(fm.nombre).value;
                         break;
                 }
                 keyValue = { [fm.nombre]: value };
-                request = { ...request, ...keyValue };
-            } catch (error) {
+                request = Object.assign(Object.assign({}, request), keyValue);
+            }
+            catch (error) {
                 console.error("error readFormValues() en id: " + fm.nombre + " " + value);
                 console.error(error);
             }
         }
         return request;
-
     }
-    cleanFormValues(cleanID = true): void {
+    cleanFormValues(cleanID = true) {
         for (let fm of fieldsModel) {
             if (!(!cleanID && fm.nombre == "id")) {
                 try {
@@ -173,38 +146,34 @@ export class Form {
                         case "radio":
                             fm.options.forEach(opt => {
                                 let id = opt.value.toLowerCase().split(' ').join('_').split('-').join('');
-                                let element:HTMLInputElement = document.getElementById(id) as HTMLInputElement;
+                                let element = document.getElementById(id);
                                 element.checked = false;
                             });
                             break;
-
                         case "checkbox":
-                            (document.getElementById(fm.nombre) as HTMLInputElement).checked = false;
+                            document.getElementById(fm.nombre).checked = false;
                             break;
-
                         default:
-                            (document.getElementById(fm.nombre) as HTMLInputElement).value = "";
+                            document.getElementById(fm.nombre).value = "";
                             break;
                     }
-                } catch (error) {
+                }
+                catch (error) {
                     console.error("error cleanFormValues() en id: " + fm.nombre);
                     console.error(error);
                 }
             }
         }
     }
-    // #endregion
-
-    // #region Fields
     renderFields() {
         fieldsModel.forEach(field => {
             let fInst;
             switch (field.type) {
                 case "number":
-                    fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min as number, field.max as number);
+                    fInst = new FieldNumber(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min, field.max);
                     break;
                 case "date":
-                    fInst = new FieldDate(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min as string, field.max as string);
+                    fInst = new FieldDate(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.min, field.max);
                     break;
                 case "checkbox":
                     fInst = new FieldCheckbox(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible);
@@ -218,7 +187,6 @@ export class Form {
                 case "select":
                     fInst = new FieldSelect(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.options);
                     break;
-
                 default:
                     fInst = new FieldTextEmail(field.nombre, field.placeholder, field.isRequired, field.isDisabled, field.isVisible, field.type, field.maxlength);
                     break;
@@ -226,13 +194,9 @@ export class Form {
             this.fields.push(fInst);
             this.fieldContElement.appendChild(fInst.element);
         });
-        console.log("%cFields instances: ", "color: green", this.fields)
+        console.log("%cFields instances: ", "color: green", this.fields);
     }
-    // #endregion
-
-    // #region Buttons
     setButons() {
-        // this.formElement.onclick = this.onSubmit;
         document.getElementById("btnSubmit").onclick = this.onSubmit;
         document.getElementById("btnRemove").onclick = this.onRemove;
         document.getElementById("btnClear").onclick = this.onClear;
@@ -261,8 +225,5 @@ export class Form {
         if (confirm("¿Esta seguro que desea vaciar los campos?"))
             MemoryManager.instance.formInstance.cleanFormValues(false);
     }
-    // #endregion
-
-
-
 }
+//# sourceMappingURL=form.js.map

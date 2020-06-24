@@ -1,4 +1,4 @@
-import { iFieldsModel, eType } from './interfaces';
+import { iFieldsModel, eType } from './interfaces.js';
 
 /**
  * Configuracion del modelo de datos para form y tabla

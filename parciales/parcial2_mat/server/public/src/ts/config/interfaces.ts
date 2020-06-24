@@ -1,3 +1,4 @@
+import { Anuncio_Mascota } from './datos-modelo';
 
 export enum eType {
     text="text", 
@@ -39,3 +40,9 @@ export enum eAnimal{
     perro = "perro"
 }
 
+// 
+
+export interface iResponse {
+    data: any;
+    message: string;
+}

@@ -1,4 +1,4 @@
-import { eAnimal, eVacunas } from './interfaces';
+import { eAnimal, eVacunas } from './interfaces.js';
 
 export class Anuncio {
     constructor(id:number, titulo:string, transaccion:string = "ventas", descripcion:string, precio:number, ) {

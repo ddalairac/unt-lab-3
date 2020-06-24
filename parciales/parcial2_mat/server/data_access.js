@@ -1,5 +1,5 @@
 (function () {
-    let delay = 5000;
+    let delay = 500;
     function getID(array) {
         if (array.length == 0) {
             return 1;

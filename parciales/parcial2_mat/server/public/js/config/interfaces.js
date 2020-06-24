@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var eType;
+export var eType;
 (function (eType) {
     eType["text"] = "text";
     eType["email"] = "email";
@@ -10,15 +8,15 @@ var eType;
     eType["date"] = "date";
     eType["radio"] = "radio";
     eType["select"] = "select";
-})(eType = exports.eType || (exports.eType = {}));
-// 
-var eVacunas;
+})(eType || (eType = {}));
+export var eVacunas;
 (function (eVacunas) {
     eVacunas["si"] = "si";
     eVacunas["no"] = "no";
-})(eVacunas = exports.eVacunas || (exports.eVacunas = {}));
-var eAnimal;
+})(eVacunas || (eVacunas = {}));
+export var eAnimal;
 (function (eAnimal) {
     eAnimal["gato"] = "gato";
     eAnimal["perro"] = "perro";
-})(eAnimal = exports.eAnimal || (exports.eAnimal = {}));
+})(eAnimal || (eAnimal = {}));
+//# sourceMappingURL=interfaces.js.map
