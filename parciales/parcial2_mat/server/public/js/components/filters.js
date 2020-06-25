@@ -99,8 +99,7 @@ export class Filters {
             this.byNaHaEl.value = JSON.parse(localStorage.getItem('byNaHaEl'));
             this.colsCkBx = JSON.parse(localStorage.getItem('colsCkBx'));
             this.colsCkBx.forEach((ckBx) => {
-                let el = document.getElementById(ckBx.nombre);
-                el.checked = ckBx.isVisible;
+                document.getElementById(ckBx.nombre).checked = ckBx.isVisible;
             });
         }
     }

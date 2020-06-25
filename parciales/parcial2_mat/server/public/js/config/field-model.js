@@ -12,14 +12,14 @@ export var fNames;
     fNames["vacunas"] = "vacunas";
 })(fNames || (fNames = {}));
 export const filterModel = [
-    { type: eType.checkbox, nombre: fNames.id, placeholder: "Dd", isRequired: true, isDisabled: false, isVisible: false },
+    { type: eType.checkbox, nombre: fNames.id, placeholder: "Id", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.titulo, placeholder: "Título", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.transaccion, placeholder: "Transacción", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.descripcion, placeholder: "Descripción", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.precio, placeholder: "Precio", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.animal, placeholder: "Animal", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.raza, placeholder: "Raza", isRequired: true, isDisabled: false, isVisible: true },
-    { type: eType.checkbox, nombre: fNames.fecha_de_nacimiento, placeholder: "Nacimiento", isRequired: true, isDisabled: false, isVisible: true },
+    { type: eType.checkbox, nombre: fNames.fecha_de_nacimiento, placeholder: "Fecha nacimiento", isRequired: true, isDisabled: false, isVisible: true },
     { type: eType.checkbox, nombre: fNames.vacunas, placeholder: "Vacunas", isRequired: true, isDisabled: false, isVisible: true }
 ];
 export const fieldsModel = [

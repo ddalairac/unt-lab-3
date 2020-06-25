@@ -121,6 +121,11 @@ export class Filters {
         this.byPrHaEl.value = "";
         this.byNaDeEl.value = "";
         this.byNaHaEl.value = "";
+        
+        // resetear checkbox tambien
+        // this.colsCkBx.forEach((ckBx)=>{
+        //     (document.getElementById(ckBx.nombre) as HTMLInputElement).checked = true;
+        // })
         MemoryManager.instance.filterAndRender();
     }
     
@@ -149,8 +154,7 @@ export class Filters {
             this.colsCkBx = JSON.parse(localStorage.getItem('colsCkBx'));
 
             this.colsCkBx.forEach((ckBx)=>{
-                let el:HTMLInputElement = document.getElementById(ckBx.nombre) as HTMLInputElement;
-                el.checked = ckBx.isVisible
+                (document.getElementById(ckBx.nombre) as HTMLInputElement).checked = ckBx.isVisible;
             })
         }
     }
