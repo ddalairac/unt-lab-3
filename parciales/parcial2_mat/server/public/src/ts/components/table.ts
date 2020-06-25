@@ -1,20 +1,17 @@
 import { MemoryManager } from "../services/memory-manager.js";
-import { fieldsModel, filterModel } from "../config/field-model.js";
+import { fieldsModel } from "../config/field-model.js";
 
-/**
- * Administra el componente tabla
- */
+/** Administra el componente tabla */
 export class Table {
-    /* 
-    * Crea el elemento tabla y lo retorna 
-    */
+
+    /** Crea el elemento tabla y lo retorna */
     static render(tableData) {
         let tableEl = document.createElement('table');
 
         let theadEl = document.createElement('thead');
         let trEl = document.createElement('tr');
         let key;
-        for (let col of MemoryManager.instance.filtersInstance.cols) {
+        for (let col of MemoryManager.instance.filtersInstance.colsCkBx) {
             if (col.isVisible) {
                 key = col.placeholder
                 let thEl = document.createElement('th');
@@ -34,7 +31,7 @@ export class Table {
                 let tdEl = document.createElement('td');
                 let value = Table.tdValue(key, trData[key])
                 tdEl.innerHTML = value;//trData[key];
-                tdEl.setAttribute('data-before', key.toLowerCase().split(' ').join('_').split('-').join(''));
+                tdEl.setAttribute('data-before', key.toLowerCase().split('_')[0]); //.join(' ').split('-').join(' '));
                 trEl.appendChild(tdEl);
             }
             trEl.onclick = Table.rowClick
@@ -45,9 +42,7 @@ export class Table {
         return tableEl;
     }
 
-    /* 
-    * Evalua como se debe renderizar el valor del item en la tabla
-     */
+    /** Evalua como se debe renderizar el valor del item en la tabla */
     static tdValue(key, value) {
         let renderValue = value;
         for (let fm of fieldsModel) {
@@ -76,9 +71,7 @@ export class Table {
         return renderValue;
     }
 
-    /** 
-     * Evento Click en row de la tabla
-    */
+    /** Evento Click en row de la tabla */
     static rowClick() {
         /* 
         * Inicialmente hice un toogle del row, pero no me parecio una buena experiencia modificar el item a mitad de la edicion,

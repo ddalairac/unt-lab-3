@@ -12,7 +12,7 @@ import { Filters } from '../components/filters.js';
  * Administra la memoria de la aplicacion
  */
 export class MemoryManager {
-    constructor() {
+    private constructor() {
         if (MemoryManager._instance) {
             throw "No se puede crear otra instancia de MemoryManager";
         }
@@ -20,26 +20,21 @@ export class MemoryManager {
         console.log(ASCIIArt);
         this.formInstance = new Form();
         this.filtersInstance = new Filters();
-        // this.data = [];
     }
-    static get instance() {
+    public static get instance() {
         if (!this._instance)
             new MemoryManager();
         return this._instance;
     }
-    static _instance: MemoryManager;
+    private static _instance: MemoryManager;
+    private containerElement: HTMLElement;
+    public tableElement: HTMLElement;
+    public filtersInstance: Filters;
+    public formInstance: Form;
+    public data: Anuncio_Mascota[];
 
-    tableElement: HTMLElement;
-    containerElement: HTMLElement;
-    filtersInstance: Filters;
-    formInstance: Form;
-    data: Anuncio_Mascota[] = [];
-
-    // selectID;
-
-
-    /** Valida que la informacion recibida sea este correctamente modelada */
-    validateTypes(data: any[]): void {
+    /** Valida que la informacion recibida sea este correctamente modelada (Heredado de la version JS, parcial 1)*/
+    private validateTypes(data: any[]): void {
         console.log(" ")
         console.log("%cValidate types", "color: green;")
         if (data[0]) {
@@ -55,7 +50,8 @@ export class MemoryManager {
         }
     }
 
-    crearObjetoAnuncio(data: Anuncio_Mascota[] | any[]): Anuncio_Mascota[] {
+    /** Crea el objeto del tipo solicitado en el PDF */
+    private crearObjetoAnuncio(data: Anuncio_Mascota[] | any[]): Anuncio_Mascota[] {
         console.log("data", data)
         let lista: any[] = []
         data.forEach(item => {
@@ -75,22 +71,28 @@ export class MemoryManager {
         console.log("anuncios", lista)
         return lista;
     }
+
     /** Ejecuta la llamada para obtener la info y renderiza*/
-    readAndRender() {
+    public readAndRender() {
         restXHR.get("traer").then(
             // restFetch.get("traer").then(
             (response) => {
                 this.validateTypes((response as any).data);
                 this.data = this.crearObjetoAnuncio((response as iResponse).data);
+                this.filtersInstance.restoreFilters()
                 this.filterAndRender()
             }
         )
     }
-    filterAndRender(){
+    
+    /** Filtra la lista y renderiza*/
+    public filterAndRender(){
         let filterData = this.filtersInstance.applyFilters(this.data);
         this.render(filterData)
     }
-    render(data:any[]) {
+
+    /** Renderiza*/
+    private render(data:any[]) {
         if (!this.containerElement) this.containerElement = document.getElementById("container");
         if (this.tableElement) this.containerElement.removeChild(this.tableElement);
         let noDataEl = document.querySelector(".sindatos");
@@ -100,10 +102,8 @@ export class MemoryManager {
         this.containerElement.appendChild(this.tableElement);
     }
 
-    /**
-     * Ejecuta las llamadas para agregar o editar un item 
-     */
-    saveEditData() {
+    /** Ejecuta las llamadas para agregar o editar un item  */
+    public saveEditData() {
         let dto = this.formInstance.readFormValues();
         if (Validate.form(dto)) {
             if (this.formInstance.isEdit) {
@@ -129,10 +129,8 @@ export class MemoryManager {
         }
     }
 
-    /**
-     * Ejecuta la llamada para borrar un item 
-     */
-    removeData() {
+    /** Ejecuta la llamada para borrar un item */
+    public removeData() {
         let id = this.formInstance.readFormValues().id;
         let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params)

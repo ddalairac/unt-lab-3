@@ -10,7 +10,7 @@ export class Form {
         this.btnNewElement = document.getElementById("btnNew");
         this.titleElement = document.getElementById("formTitle");
         this.fieldContElement = document.querySelector(".fieldContainer");
-        this.renderFields();
+        this.createFields();
         this.setButons();
         this.isEdit = false;
     }
@@ -24,17 +24,6 @@ export class Form {
         this.formElement.classList.remove("edit");
         this.btnNewElement.disabled = false;
     }
-    newDataInForm() {
-        this.cleanFormValues();
-        this.formOpen();
-        this.formElement.setAttribute("style", `top: 0;`);
-        this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo anuncio`;
-        this.formElement.classList.remove("edit");
-        document.getElementById("btnSubmit").innerHTML = `<i class="fas fa-save"></i> Guardar nuevo`;
-        document.getElementById("btnRemove").classList.add("hidden");
-        this.addIconAndDefaults();
-        this.isEdit = false;
-    }
     addIconAndDefaults() {
         document.querySelector(".form #transaccion").value = "venta";
         let lVaElement = document.getElementById("label_vacunas");
@@ -46,6 +35,17 @@ export class Form {
         let lRaElement = document.getElementById("label_raza");
         let lRText = lRaElement.innerText;
         lRaElement.innerHTML = `<i class="fas fa-paw"></i> ${lRText}`;
+    }
+    newDataInForm() {
+        this.cleanFormValues();
+        this.formOpen();
+        this.formElement.setAttribute("style", `top: 0;`);
+        this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo anuncio`;
+        this.formElement.classList.remove("edit");
+        document.getElementById("btnSubmit").innerHTML = `<i class="fas fa-save"></i> Guardar nuevo`;
+        document.getElementById("btnRemove").classList.add("hidden");
+        this.addIconAndDefaults();
+        this.isEdit = false;
     }
     editDataInForm(index, topPosition) {
         this.cleanFormValues();
@@ -165,7 +165,7 @@ export class Form {
             }
         }
     }
-    renderFields() {
+    createFields() {
         fieldsModel.forEach(fm => {
             let fInst;
             switch (fm.type) {

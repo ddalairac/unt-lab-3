@@ -15,42 +15,31 @@ export class Form {
         this.btnNewElement = document.getElementById("btnNew") as HTMLButtonElement;
         this.titleElement = document.getElementById("formTitle") as HTMLElement;
         this.fieldContElement = document.querySelector(".fieldContainer") as HTMLElement;
-        this.renderFields();
+        this.createFields();
         this.setButons();
         this.isEdit = false;
     }
-    formElement: HTMLElement & Anuncio_Mascota;
-    fieldContElement: HTMLElement;
-    fields: Field[];
-    btnNewElement: HTMLButtonElement;
-    titleElement: HTMLElement;
-    isEdit: Boolean;
+    private fieldContElement: HTMLElement;
+    private btnNewElement: HTMLButtonElement;
+    private titleElement: HTMLElement;
+    public formElement: HTMLElement & Anuncio_Mascota;
+    public fields: Field[];
+    public isEdit: boolean;
 
     // #region Form
-    formOpen() {
+    public formOpen() {
         Validate.cleanErrors();
         this.formElement.classList.remove("close");
         this.btnNewElement.disabled = true;
     }
-    formClose() {
+    public formClose() {
         this.formElement.classList.add("close");
         this.formElement.classList.remove("edit");
         this.btnNewElement.disabled = false;
+    }
 
-    }
-    newDataInForm() {
-        this.cleanFormValues();
-        this.formOpen();
-        this.formElement.setAttribute("style", `top: 0;`);
-        this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo anuncio`;
-        this.formElement.classList.remove("edit");
-        document.getElementById("btnSubmit").innerHTML = `<i class="fas fa-save"></i> Guardar nuevo`;
-        document.getElementById("btnRemove").classList.add("hidden");
-        this.addIconAndDefaults();
-        this.isEdit = false;
-    }
-    addIconAndDefaults() {
-        // this.formElement.transaccion.value = "venta";
+    /** Agrega los iconos pedidos en la consigna del PDF */
+    private addIconAndDefaults() {
         (document.querySelector(".form #transaccion") as HTMLInputElement).value = "venta";
 
         let lVaElement: HTMLElement = document.getElementById("label_vacunas") as HTMLElement;
@@ -65,8 +54,22 @@ export class Form {
         let lRText: string = lRaElement.innerText;
         lRaElement.innerHTML = `<i class="fas fa-paw"></i> ${lRText}`;
     }
-    // editDataInForm(id, trElement) {
-    editDataInForm(index: number, topPosition: number) {
+
+    /** Prepara el fomulario para agregar un nuevo item a la lista */
+    private newDataInForm() {
+        this.cleanFormValues();
+        this.formOpen();
+        this.formElement.setAttribute("style", `top: 0;`);
+        this.titleElement.innerHTML = `<i class='fas fa-plus'></i> Nuevo anuncio`;
+        this.formElement.classList.remove("edit");
+        document.getElementById("btnSubmit").innerHTML = `<i class="fas fa-save"></i> Guardar nuevo`;
+        document.getElementById("btnRemove").classList.add("hidden");
+        this.addIconAndDefaults();
+        this.isEdit = false;
+    }
+    
+    /** Prepara el fomulario para editar un item de la lista */
+    public editDataInForm(index: number, topPosition: number) {
         this.cleanFormValues();
         let formData = MemoryManager.instance.data[index];
         this.populateFormValues(formData)
@@ -80,14 +83,18 @@ export class Form {
         // this.addIconAndDefaults();
         this.isEdit = true;
     }
-    cancelEditDataInForm() {
+
+    /** Cancela la edicion del form*/
+    private cancelEditDataInForm() {
         this.formClose();
         let rows: Element[] = [...document.querySelectorAll("tbody tr")];
         for (let row of rows) {
             row.classList.remove("active");
         }
     }
-    populateFormValues(formData: any) {
+
+    /** Popula los datos del item en el fomulario para su edicion */
+    private populateFormValues(formData: any) {
         for (let fm of fieldsModel) {
             try {
                 switch (fm.type) {
@@ -122,7 +129,9 @@ export class Form {
         }
         // }
     }
-    readFormValues(): Anuncio_Mascota | any {
+
+    /** Lee los datos del form y los retorna */
+    public readFormValues(): Anuncio_Mascota | any {
         let request = {}
         for (let fm of fieldsModel) {
             let value: any = "";
@@ -165,7 +174,9 @@ export class Form {
         return request;
 
     }
-    cleanFormValues(cleanID = true): void {
+
+    /** Vacia los datos de los fields del fomulario */
+    private cleanFormValues(cleanID = true): void {
         for (let fm of fieldsModel) {
             if (!(!cleanID && fm.nombre == "id")) {
                 try {
@@ -196,7 +207,8 @@ export class Form {
     // #endregion
 
     // #region Fields
-    renderFields() {
+    /** Crea los fields del formulario en base a la configuracion */
+    private createFields() {
         fieldsModel.forEach(fm => {
             let fInst;
             switch (fm.type) {
@@ -231,7 +243,7 @@ export class Form {
     // #endregion
 
     // #region Buttons
-    setButons() {
+    private setButons() {
         // this.formElement.onclick = this.onSubmit;
         document.getElementById("btnSubmit").onclick = this.onSubmit;
         document.getElementById("btnRemove").onclick = this.onRemove;
@@ -240,23 +252,23 @@ export class Form {
         document.getElementById("btnCancelX").onclick = this.onCancel;
         document.getElementById("btnNew").onclick = this.onNew;
     }
-    onNew() {
+    private onNew() {
         MemoryManager.instance.formInstance.newDataInForm();
     }
-    onSubmit() {
+    private onSubmit() {
         event.preventDefault();
         MemoryManager.instance.saveEditData();
     }
-    onRemove() {
+    private onRemove() {
         event.preventDefault();
         if (confirm("¿Esta seguro que desea eliminar los datos?"))
             MemoryManager.instance.removeData();
     }
-    onCancel() {
+    private onCancel() {
         event.preventDefault();
         MemoryManager.instance.formInstance.cancelEditDataInForm();
     }
-    onClear() {
+    private onClear() {
         event.preventDefault();
         if (confirm("¿Esta seguro que desea vaciar los campos?"))
             MemoryManager.instance.formInstance.cleanFormValues(false);

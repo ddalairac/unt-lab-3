@@ -4,6 +4,9 @@ nav {
         display: flex;
         flex-direction: row;
         padding: 0;
+        flex-wrap: wrap;
+        margin: 0;
+
         li {
             color: white;
             padding: 8px 10px;
@@ -25,17 +28,18 @@ header {
     flex-direction: column;
     justify-content: center;
 
-    .row {
+    .logo-nav {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         ul {
-            justify-content: flex-end;  
+            justify-content: flex-end;
         }
     }
     .logo {
+        margin-right: 10px;
         img {
-            max-width: 60px;;
+            max-width: 60px;
         }
     }
 
@@ -61,11 +65,14 @@ footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     color: white;
     nav {
         ul {
             justify-content: flex-start;
         }
+    }
+    .rights {
+        text-align: right;
     }
 }

@@ -6,7 +6,7 @@ export class Table {
         let theadEl = document.createElement('thead');
         let trEl = document.createElement('tr');
         let key;
-        for (let col of MemoryManager.instance.filtersInstance.cols) {
+        for (let col of MemoryManager.instance.filtersInstance.colsCkBx) {
             if (col.isVisible) {
                 key = col.placeholder;
                 let thEl = document.createElement('th');
@@ -24,7 +24,7 @@ export class Table {
                 let tdEl = document.createElement('td');
                 let value = Table.tdValue(key, trData[key]);
                 tdEl.innerHTML = value;
-                tdEl.setAttribute('data-before', key.toLowerCase().split(' ').join('_').split('-').join(''));
+                tdEl.setAttribute('data-before', key.toLowerCase().split('_')[0]);
                 trEl.appendChild(tdEl);
             }
             trEl.onclick = Table.rowClick;

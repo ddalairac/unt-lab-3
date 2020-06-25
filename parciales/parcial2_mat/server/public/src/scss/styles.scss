@@ -1,4 +1,16 @@
+// @import "./../../node_modules/bootstrap/scss/bootstrap-reboot.scss";
+@import "./../../node_modules/bootstrap/scss/bootstrap-grid.scss";
+// @import "./../../node_modules/bootstrap/scss/buttons";
 @import "./fragments/variables.scss";
+
+@import "./fragments/header-footer.scss";
+@import "./fragments/text.scss";
+@import "./fragments/filters.scss";
+@import "./fragments/form.scss";
+@import "./fragments/fields.scss";
+@import "./fragments/table.scss";
+@import "./fragments/buttons.scss";
+
 html,
 body {
     margin: 0;
@@ -52,14 +64,6 @@ body {
         width: 164px;
     }
 }
-@import "./fragments/header.scss";
-@import "./fragments/text.scss";
-@import "./fragments/filters.scss";
-@import "./fragments/form.scss";
-@import "./fragments/fields.scss";
-@import "./fragments/table.scss";
-@import "./fragments/buttons.scss";
-
 .hidden {
     display: none !important;
 }

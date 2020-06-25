@@ -1,7 +1,6 @@
-
 .field {
     display: flex;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
     flex-wrap: wrap;
     flex-direction: column;
 
@@ -14,6 +13,7 @@
         font-weight: 300;
         text-transform: capitalize;
         margin-bottom: 3px;
+        color: $colorBlueDark;
     }
     textarea {
         width: 100%;
@@ -29,6 +29,7 @@
         font-size: 14px;
         font-weight: 300;
         min-height: 28px;
+        width: 100%;
     }
     &.radio,
     &.checkbox {
@@ -37,6 +38,7 @@
         input {
             min-height: unset;
             margin-left: 0;
+            width: auto;
         }
         label {
             margin-right: 8px;

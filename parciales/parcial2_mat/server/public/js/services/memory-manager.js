@@ -8,7 +8,6 @@ import { Anuncio_Mascota } from '../config/datos-modelo.js';
 import { Filters } from '../components/filters.js';
 export class MemoryManager {
     constructor() {
-        this.data = [];
         if (MemoryManager._instance) {
             throw "No se puede crear otra instancia de MemoryManager";
         }
@@ -51,6 +50,7 @@ export class MemoryManager {
         restXHR.get("traer").then((response) => {
             this.validateTypes(response.data);
             this.data = this.crearObjetoAnuncio(response.data);
+            this.filtersInstance.restoreFilters();
             this.filterAndRender();
         });
     }
