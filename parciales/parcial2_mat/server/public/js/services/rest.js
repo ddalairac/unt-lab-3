@@ -7,12 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { MemoryManager } from './memory-manager.js';
 export class restXHR {
     static get(resource) {
         return __awaiter(this, void 0, void 0, function* () {
             loading.addL();
             return new Promise((resolve, reject) => {
-                console.log("%crestXHR.get", "color:blue");
+                console.log("%crestXHR.get", "color:blue;");
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState == 4) {
@@ -37,7 +38,7 @@ export class restXHR {
         return __awaiter(this, void 0, void 0, function* () {
             loading.addL();
             return new Promise((resolve, reject) => {
-                console.log("%crestXHR.post", "color:blue");
+                console.log("%crestXHR.post", "color:blue;");
                 let rBody;
                 let rHeader;
                 if (params && typeof params === 'object') {
@@ -89,7 +90,7 @@ export class loading {
 export class restFetch {
     static get(resource) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("%crestFetch.get", "color:blue");
+            console.log("%crestFetch.get", "color:blue;");
             loading.addL();
             return new Promise((resolve, reject) => {
                 fetch(`${restXHR.url}${resource}`)
@@ -113,7 +114,7 @@ export class restFetch {
         return __awaiter(this, void 0, void 0, function* () {
             loading.addL();
             return new Promise((resolve, reject) => {
-                console.log("%crestFetch.post", "color:blue");
+                console.log("%crestFetch.post", "color:blue;");
                 let rBody;
                 let rHeader;
                 if (params && typeof params === 'object') {
@@ -146,4 +147,116 @@ export class restFetch {
     }
 }
 restFetch.url = "http://localhost:3000/";
+export class restJquery {
+    static get(resource) {
+        return __awaiter(this, void 0, void 0, function* () {
+            loading.addL();
+            return new Promise((resolve, reject) => {
+                console.log("%crestJquery.get", "color:blue;");
+                $.get(`${restJquery.url}${resource}`, function (data) {
+                    resolve(data);
+                })
+                    .fail(function (err) {
+                    console.error("Error post: " + resource, err);
+                    resolve(null);
+                    alert("No se pudieron obtener los datos");
+                })
+                    .always(function () {
+                    loading.removeL();
+                });
+            });
+        });
+    }
+    static post(resource, params, header) {
+        return __awaiter(this, void 0, void 0, function* () {
+            loading.addL();
+            return new Promise((resolve, reject) => {
+                console.log("%crestJquery.post", "color:blue;");
+                let rBody;
+                let rHeader;
+                if (params && typeof params === 'object') {
+                    rBody = JSON.stringify(params);
+                }
+                else {
+                    rBody = params;
+                }
+                rHeader = !header ? { "content-type": "application/json" } : header;
+                $.ajax({
+                    url: `${restJquery.url}${resource}`,
+                    type: 'post',
+                    data: rBody,
+                    headers: rHeader,
+                    success: function (data) {
+                        console.info(data);
+                        resolve(data);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        alert("No se pudo completar la operacion");
+                    }
+                })
+                    .always(function () {
+                    loading.removeL();
+                });
+            });
+        });
+    }
+}
+restJquery.url = "http://localhost:3000/";
+export class restLocaltorage {
+    static gets(resource) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                console.log("%crestLocaltorage.get", "color:blue;");
+                let data;
+                try {
+                    data = localStorage.getItem("data");
+                    if (data)
+                        data = JSON.parse(data);
+                }
+                catch (error) {
+                    data = [];
+                    alert("No se pudieron obtener los datos");
+                }
+                console.log("restLocaltorage data ", data);
+                resolve(data);
+            });
+        });
+    }
+    static post(resource, params, header) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return new Promise((resolve, reject) => {
+                console.log("%crestLocaltorage.post", "color:blue;");
+                let list = [...MemoryManager.instance.data];
+                if (resource == "alta") {
+                    let id = Math.max(...list.map((e) => e.id)) + 1;
+                    params.id = id;
+                    list.push(params);
+                }
+                else if (resource == "modificar") {
+                    list = list.map((item) => item = (item.id == params.id)
+                        ? params
+                        : item);
+                }
+                else if (resource == "baja") {
+                    console.log("params", params);
+                    let id = parseInt(params.split("=")[1]);
+                    if (typeof id == "number") {
+                        list = list.filter((item) => item.id != id);
+                    }
+                    else {
+                        console.log("delete error", id);
+                    }
+                }
+                else {
+                    resolve(null);
+                    alert("No se pudo completar la operacion");
+                }
+                let data = { data: list };
+                console.log("localStorage data", data);
+                localStorage.setItem("data", JSON.stringify(data));
+                resolve(data);
+            });
+        });
+    }
+}
 //# sourceMappingURL=rest.js.map

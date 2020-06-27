@@ -1,6 +1,6 @@
 import { Table } from '../components/table.js';
 import { Form } from '../components/form.js';
-import { restXHR, restFetch, iFetchHeader, iXHRHeader } from './rest.js';
+import { restXHR, restFetch, iFetchHeader, iXHRHeader, restJquery, restLocaltorage } from './rest.js';
 import { Validate } from './validations.js';
 import { fieldsModel } from "../config/field-model.js";
 import { ASCIIArt } from '../config/ascii-art.js';
@@ -74,25 +74,27 @@ export class MemoryManager {
 
     /** Ejecuta la llamada para obtener la info y renderiza*/
     public readAndRender() {
-        restXHR.get("traer").then(
-            // restFetch.get("traer").then(
+        // restXHR.get("traer").then(
+        // restFetch.get("traer").then(
+        restJquery.get("traer").then(
+        // restLocaltorage.gets("traer").then(
             (response) => {
-                this.validateTypes((response as any).data);
+                // this.validateTypes((response as any).data);
                 this.data = this.crearObjetoAnuncio((response as iResponse).data);
                 this.filtersInstance.restoreFilters()
                 this.filterAndRender()
             }
         )
     }
-    
+
     /** Filtra la lista y renderiza*/
-    public filterAndRender(){
+    public filterAndRender() {
         let filterData = this.filtersInstance.applyFilters(this.data);
         this.render(filterData)
     }
 
     /** Renderiza*/
-    private render(data:any[]) {
+    private render(data: any[]) {
         if (!this.containerElement) this.containerElement = document.getElementById("container");
         if (this.tableElement) this.containerElement.removeChild(this.tableElement);
         let noDataEl = document.querySelector(".sindatos");
@@ -109,7 +111,9 @@ export class MemoryManager {
             if (this.formInstance.isEdit) {
                 console.log("%cDTO Edit: ", "color:blue", dto)
                 // restXHR.post("modificar", dto).then(
-                restFetch.post("modificar", dto).then(
+                // restFetch.post("modificar", dto).then(
+                restJquery.post("modificar", dto).then(
+                // restLocaltorage.post("modificar", dto).then(
                     () => {
                         this.formInstance.formClose();
                         this.readAndRender()
@@ -118,8 +122,10 @@ export class MemoryManager {
 
             } else {
                 console.log("%cDTO New: ", "color:blue", dto)
-                restXHR.post("alta", dto).then(
-                    // restFetch.post("alta", dto).then(
+                // restXHR.post("alta", dto).then(
+                // restFetch.post("alta", dto).then(
+                restJquery.post("alta", dto).then(
+                // restLocaltorage.post("alta", dto).then(
                     () => {
                         this.formInstance.formClose();
                         this.readAndRender()
@@ -134,10 +140,13 @@ export class MemoryManager {
         let id = this.formInstance.readFormValues().id;
         let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params)
-        let header: iXHRHeader[] = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
-        restXHR.post("baja", params, header).then(
-            // let headerFetch:iFetchHeader = { "content-type": "application/x-www-form-urlencoded" }
-            // restFetch.post("baja", params, headerFetch).then(
+        // let header: iXHRHeader[] = [{ att: "content-type", value: "application/x-www-form-urlencoded" }]
+        // restXHR.post("baja", params, header).then(
+        // let headerFetch:iFetchHeader = { "content-type": "application/x-www-form-urlencoded" }
+        // restFetch.post("baja", params, headerFetch).then(
+        let headerFetch: iFetchHeader = { "content-type": "application/x-www-form-urlencoded" }
+        restJquery.post("baja", params, headerFetch).then(
+        // restLocaltorage.post("baja", params).then(
             () => {
                 this.formInstance.formClose();
                 this.readAndRender()

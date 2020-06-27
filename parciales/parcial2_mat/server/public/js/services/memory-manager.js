@@ -1,6 +1,6 @@
 import { Table } from '../components/table.js';
 import { Form } from '../components/form.js';
-import { restXHR, restFetch } from './rest.js';
+import { restJquery } from './rest.js';
 import { Validate } from './validations.js';
 import { fieldsModel } from "../config/field-model.js";
 import { ASCIIArt } from '../config/ascii-art.js';
@@ -47,8 +47,7 @@ export class MemoryManager {
         return lista;
     }
     readAndRender() {
-        restXHR.get("traer").then((response) => {
-            this.validateTypes(response.data);
+        restJquery.get("traer").then((response) => {
             this.data = this.crearObjetoAnuncio(response.data);
             this.filtersInstance.restoreFilters();
             this.filterAndRender();
@@ -74,14 +73,14 @@ export class MemoryManager {
         if (Validate.form(dto)) {
             if (this.formInstance.isEdit) {
                 console.log("%cDTO Edit: ", "color:blue", dto);
-                restFetch.post("modificar", dto).then(() => {
+                restJquery.post("modificar", dto).then(() => {
                     this.formInstance.formClose();
                     this.readAndRender();
                 });
             }
             else {
                 console.log("%cDTO New: ", "color:blue", dto);
-                restXHR.post("alta", dto).then(() => {
+                restJquery.post("alta", dto).then(() => {
                     this.formInstance.formClose();
                     this.readAndRender();
                 });
@@ -92,8 +91,8 @@ export class MemoryManager {
         let id = this.formInstance.readFormValues().id;
         let params = `id=${id}`;
         console.log("%cDelete: ", "color:blue", params);
-        let header = [{ att: "content-type", value: "application/x-www-form-urlencoded" }];
-        restXHR.post("baja", params, header).then(() => {
+        let headerFetch = { "content-type": "application/x-www-form-urlencoded" };
+        restJquery.post("baja", params, headerFetch).then(() => {
             this.formInstance.formClose();
             this.readAndRender();
         });
