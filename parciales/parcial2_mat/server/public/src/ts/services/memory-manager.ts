@@ -79,7 +79,7 @@ export class MemoryManager {
         restJquery.get("traer").then(
         // restLocaltorage.gets("traer").then(
             (response) => {
-                // this.validateTypes((response as any).data);
+                this.validateTypes((response as any).data);
                 this.data = this.crearObjetoAnuncio((response as iResponse).data);
                 this.filtersInstance.restoreFilters()
                 this.filterAndRender()

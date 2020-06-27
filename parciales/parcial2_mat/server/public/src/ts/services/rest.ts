@@ -293,7 +293,7 @@ export class restLocaltorage {
                     : item)
 
             } else if (resource == "baja") {
-                console.log("params", params)
+                // console.log("params", params)
                 let id: number = parseInt((params as string).split("=")[1])
                 if (typeof id == "number") { list = list.filter((item) => item.id != id) }
                 else { console.log("delete error", id) }
@@ -303,7 +303,7 @@ export class restLocaltorage {
                 alert("No se pudo completar la operacion");
             }
             let data = { data: list }
-            console.log("localStorage data", data)
+            // console.log("localStorage data", data)
             localStorage.setItem("data", JSON.stringify(data));
             resolve(data)
             // loading.removeL();
