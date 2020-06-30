@@ -44,6 +44,7 @@ export class Filters {
     }
     applyFilters(data) {
         let list = data;
+        list = this.onSortBy(list);
         let search = this.byTextEl.value;
         if (search) {
             list = list.filter((row) => {
@@ -102,6 +103,26 @@ export class Filters {
                 document.getElementById(ckBx.nombre).checked = ckBx.isVisible;
             });
         }
+    }
+    onSortBy(list) {
+        if (!this.sortBy)
+            this.sortBy = "id";
+        let sortid = this.sortBy;
+        if (this.lastSortBy != sortid) {
+            this.lastSortBy = sortid;
+            this.sortOrientation = true;
+        }
+        else {
+            this.sortOrientation = !this.sortOrientation;
+        }
+        let sortAtt = sortid.split("-")[1];
+        if (this.sortOrientation) {
+            list = list.sort((a, b) => { return (a[sortAtt] < b[sortAtt]) ? -1 : 1; });
+        }
+        else {
+            list = list.sort((a, b) => { return (a[sortAtt] > b[sortAtt]) ? -1 : 1; });
+        }
+        return list;
     }
     setButons() {
         document.getElementById("btnSearch").onclick = this.onSerch;

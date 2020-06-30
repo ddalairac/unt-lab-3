@@ -10,8 +10,21 @@ export class Table {
             if (col.isVisible) {
                 key = col.placeholder;
                 let thEl = document.createElement('th');
+                let attr = col.nombre.split("-")[1];
+                thEl.setAttribute("id", "sort-" + attr);
+                thEl.onclick = Table.colClick;
                 let title = key;
-                thEl.innerHTML = title;
+                if ("sort-" + attr == MemoryManager.instance.filtersInstance.sortBy) {
+                    if (MemoryManager.instance.filtersInstance.sortOrientation) {
+                        thEl.innerHTML = `${title} <i class="fas fa-sort-down"></i>`;
+                    }
+                    else {
+                        thEl.innerHTML = `${title} <i class="fas fa-sort-up"></i>`;
+                    }
+                }
+                else {
+                    thEl.innerHTML = title;
+                }
                 trEl.appendChild(thEl);
             }
         }
@@ -73,6 +86,10 @@ export class Table {
                 index++;
             }
         }
+    }
+    static colClick() {
+        MemoryManager.instance.filtersInstance.sortBy = event.target.id;
+        MemoryManager.instance.filterAndRender();
     }
 }
 //# sourceMappingURL=table.js.map

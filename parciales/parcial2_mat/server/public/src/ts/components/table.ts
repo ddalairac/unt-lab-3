@@ -15,8 +15,20 @@ export class Table {
             if (col.isVisible) {
                 key = col.placeholder
                 let thEl = document.createElement('th');
-                let title = key;    
-                thEl.innerHTML = title
+                let attr = col.nombre.split("-")[1];
+                thEl.setAttribute("id", "sort-" + attr);
+
+                thEl.onclick = Table.colClick;
+                let title = key;
+                if ("sort-" + attr == MemoryManager.instance.filtersInstance.sortBy) {
+                    if (MemoryManager.instance.filtersInstance.sortOrientation) {
+                        thEl.innerHTML = `${title} <i class="fas fa-sort-down"></i>`;
+                    } else {
+                        thEl.innerHTML = `${title} <i class="fas fa-sort-up"></i>`;
+                    }
+                } else {
+                    thEl.innerHTML = title
+                }
                 trEl.appendChild(thEl)
             }
         }
@@ -97,5 +109,11 @@ export class Table {
                 index++;
             }
         }
+    }
+
+    /** Evento Click en row de la tabla */
+    static colClick() {
+        MemoryManager.instance.filtersInstance.sortBy = (event.target as HTMLElement).id;
+        MemoryManager.instance.filterAndRender();
     }
 }

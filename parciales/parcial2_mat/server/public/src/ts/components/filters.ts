@@ -29,6 +29,10 @@ export class Filters {
     private byNaDeEl: HTMLInputElement
     private byNaHaEl: HTMLInputElement
 
+    public sortBy: string;
+    private lastSortBy: string;
+    public sortOrientation: boolean;
+
     // #region Filtros de atributos
     /** Crea los checkbox para filtrar las columnas */
     private addCols() {
@@ -68,6 +72,7 @@ export class Filters {
     /** Filtra la lista con los datos del form filtros */
     public applyFilters(data: Anuncio_Mascota[]): any[] {
         let list: Anuncio_Mascota[] = data;
+        list = this.onSortBy(list);
 
         // filtrar por texto en strings
         let search: string = this.byTextEl.value
@@ -113,7 +118,7 @@ export class Filters {
     // #region localstorage
 
     /** Limpia los fields del form de filtros */
-    public  cleanFilters() {
+    public cleanFilters() {
         this.byTextEl.value = "";
         this.byVacuEl.value = "";
         this.byAnimEl.value = "";
@@ -121,14 +126,14 @@ export class Filters {
         this.byPrHaEl.value = "";
         this.byNaDeEl.value = "";
         this.byNaHaEl.value = "";
-        
+
         // resetear checkbox tambien
         // this.colsCkBx.forEach((ckBx)=>{
         //     (document.getElementById(ckBx.nombre) as HTMLInputElement).checked = true;
         // })
         MemoryManager.instance.filterAndRender();
     }
-    
+
     /** Guarda en localstorage los fields del form de filtros */
     public saveFilters() {
         localStorage.setItem('byTextEl', JSON.stringify(this.byTextEl.value));
@@ -153,13 +158,34 @@ export class Filters {
             this.byNaHaEl.value = JSON.parse(localStorage.getItem('byNaHaEl'));
             this.colsCkBx = JSON.parse(localStorage.getItem('colsCkBx'));
 
-            this.colsCkBx.forEach((ckBx)=>{
+            this.colsCkBx.forEach((ckBx) => {
                 (document.getElementById(ckBx.nombre) as HTMLInputElement).checked = ckBx.isVisible;
             })
         }
     }
     // #endregion
-    
+
+    public onSortBy(list: Anuncio_Mascota[]): Anuncio_Mascota[] {
+        if(!this.sortBy) this.sortBy = "id";
+        let sortid = this.sortBy;
+
+        if (this.lastSortBy != sortid) {
+            this.lastSortBy = sortid;
+            this.sortOrientation = true;
+        } else {
+            this.sortOrientation = !this.sortOrientation;
+        }
+        let sortAtt = sortid.split("-")[1];
+        // console.log(sortAtt)
+        if (this.sortOrientation) {
+            list = list.sort((a, b) => { return (a[sortAtt] < b[sortAtt]) ? -1 : 1 })
+        } else {
+            list = list.sort((a, b) => { return (a[sortAtt] > b[sortAtt]) ? -1 : 1 })
+        }
+
+        return list;
+    }
+
     // #region Buttons
     private setButons() {
         document.getElementById("btnSearch").onclick = this.onSerch;

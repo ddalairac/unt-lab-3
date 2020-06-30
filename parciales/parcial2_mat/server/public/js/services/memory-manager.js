@@ -48,6 +48,7 @@ export class MemoryManager {
     }
     readAndRender() {
         restJquery.get("traer").then((response) => {
+            this.validateTypes(response.data);
             this.data = this.crearObjetoAnuncio(response.data);
             this.filtersInstance.restoreFilters();
             this.filterAndRender();
